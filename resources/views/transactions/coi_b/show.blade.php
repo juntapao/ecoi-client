@@ -85,10 +85,10 @@
             </div>
         </div>
         <div class="text-right">
-            @if($transaction->posted == null)
-                <a href="{{ route('coi_b.post', $transaction->id) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
-            @else
+            @if($transaction->posted)
                 <a href="{{ route('coi_b.print', $transaction->id) }}" class="btn btn-success">Print</a>
+            @else
+                <a href="{{ route('coi_b.post', $transaction->id) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
             @endif
         </div>
     </div>

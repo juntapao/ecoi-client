@@ -34,163 +34,167 @@ class SetupController extends Controller
     
                 $current_process = $update_process->where('status', 'loading')->first()['name'];
     
-                switch($current_process) {
-                    case 'settings': {
-                        $result = UpdateController::sync('settings');
-                        if($result) {
-                            $update_process = collect([
-                                ['name' => 'settings', 'status' => 'completed'],
-                                ['name' => 'menus', 'status' => 'loading'],
-                                ['name' => 'roles', 'status' => 'pending'],
-                                ['name' => 'users', 'status' => 'pending'],
-                                ['name' => 'regions', 'status' => 'pending'],
-                                ['name' => 'areas', 'status' => 'pending'],
-                                ['name' => 'branches', 'status' => 'pending'],
-                                ['name' => 'prices', 'status' => 'pending'],
-                                // ['name' => 'clean_up', 'status' => 'pending'],
-                            ]);
+                if($current_process) {
+                    switch($current_process) {
+                        case 'settings': {
+                            $result = UpdateController::sync('settings');
+                            if($result) {
+                                $update_process = collect([
+                                    ['name' => 'settings', 'status' => 'completed'],
+                                    ['name' => 'menus', 'status' => 'loading'],
+                                    ['name' => 'roles', 'status' => 'pending'],
+                                    ['name' => 'users', 'status' => 'pending'],
+                                    ['name' => 'regions', 'status' => 'pending'],
+                                    ['name' => 'areas', 'status' => 'pending'],
+                                    ['name' => 'branches', 'status' => 'pending'],
+                                    ['name' => 'prices', 'status' => 'pending'],
+                                    // ['name' => 'clean_up', 'status' => 'pending'],
+                                ]);
+                            }
+                            break;
                         }
-                        break;
-                    }
-                    case 'menus': {
-                        $result = UpdateController::sync('menus');
-                        if($result) {
-                            $update_process = collect([
-                                ['name' => 'settings', 'status' => 'completed'],
-                                ['name' => 'menus', 'status' => 'completed'],
-                                ['name' => 'roles', 'status' => 'loading'],
-                                ['name' => 'users', 'status' => 'pending'],
-                                ['name' => 'regions', 'status' => 'pending'],
-                                ['name' => 'areas', 'status' => 'pending'],
-                                ['name' => 'branches', 'status' => 'pending'],
-                                ['name' => 'prices', 'status' => 'pending'],
-                                // ['name' => 'clean_up', 'status' => 'pending'],
-                            ]);
+                        case 'menus': {
+                            $result = UpdateController::sync('menus');
+                            if($result) {
+                                $update_process = collect([
+                                    ['name' => 'settings', 'status' => 'completed'],
+                                    ['name' => 'menus', 'status' => 'completed'],
+                                    ['name' => 'roles', 'status' => 'loading'],
+                                    ['name' => 'users', 'status' => 'pending'],
+                                    ['name' => 'regions', 'status' => 'pending'],
+                                    ['name' => 'areas', 'status' => 'pending'],
+                                    ['name' => 'branches', 'status' => 'pending'],
+                                    ['name' => 'prices', 'status' => 'pending'],
+                                    // ['name' => 'clean_up', 'status' => 'pending'],
+                                ]);
+                            }
+                            break;
                         }
-                        break;
-                    }
-                    case 'roles': {
-                        $result = UpdateController::sync('roles');
-                        if($result) {
-                            $update_process = collect([
-                                ['name' => 'settings', 'status' => 'completed'],
-                                ['name' => 'menus', 'status' => 'completed'],
-                                ['name' => 'roles', 'status' => 'completed'],
-                                ['name' => 'users', 'status' => 'loading'],
-                                ['name' => 'regions', 'status' => 'pending'],
-                                ['name' => 'areas', 'status' => 'pending'],
-                                ['name' => 'branches', 'status' => 'pending'],
-                                ['name' => 'prices', 'status' => 'pending'],
-                                // ['name' => 'clean_up', 'status' => 'pending'],
-                            ]);
+                        case 'roles': {
+                            $result = UpdateController::sync('roles');
+                            if($result) {
+                                $update_process = collect([
+                                    ['name' => 'settings', 'status' => 'completed'],
+                                    ['name' => 'menus', 'status' => 'completed'],
+                                    ['name' => 'roles', 'status' => 'completed'],
+                                    ['name' => 'users', 'status' => 'loading'],
+                                    ['name' => 'regions', 'status' => 'pending'],
+                                    ['name' => 'areas', 'status' => 'pending'],
+                                    ['name' => 'branches', 'status' => 'pending'],
+                                    ['name' => 'prices', 'status' => 'pending'],
+                                    // ['name' => 'clean_up', 'status' => 'pending'],
+                                ]);
+                            }
+                            break;
                         }
-                        break;
-                    }
-                    case 'users': {
-                        $result = UpdateController::sync('users');
-                        if($result) {
-                            $update_process = collect([
-                                ['name' => 'settings', 'status' => 'completed'],
-                                ['name' => 'menus', 'status' => 'completed'],
-                                ['name' => 'roles', 'status' => 'completed'],
-                                ['name' => 'users', 'status' => 'completed'],
-                                ['name' => 'regions', 'status' => 'loading'],
-                                ['name' => 'areas', 'status' => 'pending'],
-                                ['name' => 'branches', 'status' => 'pending'],
-                                ['name' => 'prices', 'status' => 'pending'],
-                                // ['name' => 'clean_up', 'status' => 'pending'],
-                            ]);
+                        case 'users': {
+                            $result = UpdateController::sync('users');
+                            if($result) {
+                                $update_process = collect([
+                                    ['name' => 'settings', 'status' => 'completed'],
+                                    ['name' => 'menus', 'status' => 'completed'],
+                                    ['name' => 'roles', 'status' => 'completed'],
+                                    ['name' => 'users', 'status' => 'completed'],
+                                    ['name' => 'regions', 'status' => 'loading'],
+                                    ['name' => 'areas', 'status' => 'pending'],
+                                    ['name' => 'branches', 'status' => 'pending'],
+                                    ['name' => 'prices', 'status' => 'pending'],
+                                    // ['name' => 'clean_up', 'status' => 'pending'],
+                                ]);
+                            }
+                            break;
                         }
-                        break;
-                    }
-                    case 'regions': {
-                        $result = UpdateController::sync('regions');
-                        if($result) {
-                            $update_process = collect([
-                                ['name' => 'settings', 'status' => 'completed'],
-                                ['name' => 'menus', 'status' => 'completed'],
-                                ['name' => 'roles', 'status' => 'completed'],
-                                ['name' => 'users', 'status' => 'completed'],
-                                ['name' => 'regions', 'status' => 'completed'],
-                                ['name' => 'areas', 'status' => 'loading'],
-                                ['name' => 'branches', 'status' => 'pending'],
-                                ['name' => 'prices', 'status' => 'pending'],
-                                // ['name' => 'clean_up', 'status' => 'pending'],
-                            ]);
+                        case 'regions': {
+                            $result = UpdateController::sync('regions');
+                            if($result) {
+                                $update_process = collect([
+                                    ['name' => 'settings', 'status' => 'completed'],
+                                    ['name' => 'menus', 'status' => 'completed'],
+                                    ['name' => 'roles', 'status' => 'completed'],
+                                    ['name' => 'users', 'status' => 'completed'],
+                                    ['name' => 'regions', 'status' => 'completed'],
+                                    ['name' => 'areas', 'status' => 'loading'],
+                                    ['name' => 'branches', 'status' => 'pending'],
+                                    ['name' => 'prices', 'status' => 'pending'],
+                                    // ['name' => 'clean_up', 'status' => 'pending'],
+                                ]);
+                            }
+                            break;
                         }
-                        break;
-                    }
-                    case 'areas': {
-                        $result = UpdateController::sync('areas');
-                        if($result) {
-                            $update_process = collect([
-                                ['name' => 'settings', 'status' => 'completed'],
-                                ['name' => 'menus', 'status' => 'completed'],
-                                ['name' => 'roles', 'status' => 'completed'],
-                                ['name' => 'users', 'status' => 'completed'],
-                                ['name' => 'regions', 'status' => 'completed'],
-                                ['name' => 'areas', 'status' => 'completed'],
-                                ['name' => 'branches', 'status' => 'loading'],
-                                ['name' => 'prices', 'status' => 'pending'],
-                                // ['name' => 'clean_up', 'status' => 'pending'],
-                            ]);
+                        case 'areas': {
+                            $result = UpdateController::sync('areas');
+                            if($result) {
+                                $update_process = collect([
+                                    ['name' => 'settings', 'status' => 'completed'],
+                                    ['name' => 'menus', 'status' => 'completed'],
+                                    ['name' => 'roles', 'status' => 'completed'],
+                                    ['name' => 'users', 'status' => 'completed'],
+                                    ['name' => 'regions', 'status' => 'completed'],
+                                    ['name' => 'areas', 'status' => 'completed'],
+                                    ['name' => 'branches', 'status' => 'loading'],
+                                    ['name' => 'prices', 'status' => 'pending'],
+                                    // ['name' => 'clean_up', 'status' => 'pending'],
+                                ]);
+                            }
+                            break;
                         }
-                        break;
-                    }
-                    case 'branches': {
-                        $result = UpdateController::sync('branches');
-                        if($result) {
-                            $update_process = collect([
-                                ['name' => 'settings', 'status' => 'completed'],
-                                ['name' => 'menus', 'status' => 'completed'],
-                                ['name' => 'roles', 'status' => 'completed'],
-                                ['name' => 'users', 'status' => 'completed'],
-                                ['name' => 'regions', 'status' => 'completed'],
-                                ['name' => 'areas', 'status' => 'completed'],
-                                ['name' => 'branches', 'status' => 'completed'],
-                                ['name' => 'prices', 'status' => 'loading'],
-                                // ['name' => 'clean_up', 'status' => 'pending'],
-                            ]);
+                        case 'branches': {
+                            $result = UpdateController::sync('branches');
+                            if($result) {
+                                $update_process = collect([
+                                    ['name' => 'settings', 'status' => 'completed'],
+                                    ['name' => 'menus', 'status' => 'completed'],
+                                    ['name' => 'roles', 'status' => 'completed'],
+                                    ['name' => 'users', 'status' => 'completed'],
+                                    ['name' => 'regions', 'status' => 'completed'],
+                                    ['name' => 'areas', 'status' => 'completed'],
+                                    ['name' => 'branches', 'status' => 'completed'],
+                                    ['name' => 'prices', 'status' => 'loading'],
+                                    // ['name' => 'clean_up', 'status' => 'pending'],
+                                ]);
+                            }
+                            break;
                         }
-                        break;
-                    }
-                    case 'prices': {
-                        $result = UpdateController::sync('prices');
-                        if($result) {
-                            $update_process = collect([
-                                ['name' => 'settings', 'status' => 'completed'],
-                                ['name' => 'menus', 'status' => 'completed'],
-                                ['name' => 'roles', 'status' => 'completed'],
-                                ['name' => 'users', 'status' => 'completed'],
-                                ['name' => 'regions', 'status' => 'completed'],
-                                ['name' => 'areas', 'status' => 'completed'],
-                                ['name' => 'branches', 'status' => 'completed'],
-                                ['name' => 'prices', 'status' => 'completed'],
-                                // ['name' => 'clean_up', 'status' => 'loading'],
-                            ]);
+                        case 'prices': {
+                            $result = UpdateController::sync('prices');
+                            if($result) {
+                                $update_process = collect([
+                                    ['name' => 'settings', 'status' => 'completed'],
+                                    ['name' => 'menus', 'status' => 'completed'],
+                                    ['name' => 'roles', 'status' => 'completed'],
+                                    ['name' => 'users', 'status' => 'completed'],
+                                    ['name' => 'regions', 'status' => 'completed'],
+                                    ['name' => 'areas', 'status' => 'completed'],
+                                    ['name' => 'branches', 'status' => 'completed'],
+                                    ['name' => 'prices', 'status' => 'completed'],
+                                    // ['name' => 'clean_up', 'status' => 'loading'],
+                                ]);
+                            }
+                            break;
                         }
-                        break;
+                        // case 'clean_up': {
+                        //     $result = UpdateController::sync('prices');
+                        //     if($result) {
+                        //         $update_process = collect([
+                        //             ['name' => 'settings', 'status' => 'completed'],
+                        //             ['name' => 'menus', 'status' => 'completed'],
+                        //             ['name' => 'roles', 'status' => 'completed'],
+                        //             ['name' => 'users', 'status' => 'completed'],
+                        //             ['name' => 'regions', 'status' => 'completed'],
+                        //             ['name' => 'areas', 'status' => 'completed'],
+                        //             ['name' => 'branches', 'status' => 'completed'],
+                        //             ['name' => 'prices', 'status' => 'completed'],
+                        //             ['name' => 'clean_up', 'status' => 'completed'],
+                        //         ]);
+                        //     }
+                        //     break;
+                        // }
+                        default: {
+                            return redirect()->route('login');
+                        }
                     }
-                    // case 'clean_up': {
-                    //     $result = UpdateController::sync('prices');
-                    //     if($result) {
-                    //         $update_process = collect([
-                    //             ['name' => 'settings', 'status' => 'completed'],
-                    //             ['name' => 'menus', 'status' => 'completed'],
-                    //             ['name' => 'roles', 'status' => 'completed'],
-                    //             ['name' => 'users', 'status' => 'completed'],
-                    //             ['name' => 'regions', 'status' => 'completed'],
-                    //             ['name' => 'areas', 'status' => 'completed'],
-                    //             ['name' => 'branches', 'status' => 'completed'],
-                    //             ['name' => 'prices', 'status' => 'completed'],
-                    //             ['name' => 'clean_up', 'status' => 'completed'],
-                    //         ]);
-                    //     }
-                    //     break;
-                    // }
-                    default: {
-                        return redirect()->route('login');
-                    }
+                } else {
+                    return redirect()->route('login');
                 }
             }
         } catch(\Exception $exception) {

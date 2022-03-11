@@ -70,10 +70,10 @@
         </div>
         <div class="text-right">
             {{-- <a href="{{ route('coi_ao.index') }}" class="btn btn-primary">Cancel</a> --}}
-            @if($transaction->posted == null)
-                <a href="{{ route('coi_ao.post', $transaction->id) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
-            @else
+            @if($transaction->posted)
                 <a href="{{ route('coi_ao.print', $transaction->id) }}" class="btn btn-success">Print</a>
+            @else
+                <a href="{{ route('coi_ao.post', $transaction->id) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
             @endif
         </div>
     </div>
