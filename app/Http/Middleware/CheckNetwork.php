@@ -23,7 +23,7 @@ class CheckNetwork
             'terminal_signature' => $terminal_signature,
         ];
 
-        $server_data = CommonController::curl(env('ECOI_SERVER_URL').'/api/status', 'get', $body);
+        $server_data = CommonController::curl(config('app.ecoi_server_url').'/api/status', 'get', $body);
 
         session(['network-status' => true]);
 

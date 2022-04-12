@@ -149,7 +149,7 @@ class LoginController extends Controller
                 'local_signature' => $local_signature,
             ];
     
-            $server_data = CommonController::curl(env('ECOI_SERVER_URL').'/api/new-terminal', 'get', $body);
+            $server_data = CommonController::curl(config('app.ecoi_server_url').'/api/new-terminal', 'get', $body);
 
             if($server_data) {
                 if(isset($server_data->status_code)) {

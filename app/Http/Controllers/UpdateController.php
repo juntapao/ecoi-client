@@ -117,7 +117,7 @@ class UpdateController extends Controller
                 'ids' => $all_ids,
             ];
 
-            $server_data = CommonController::curl(env('ECOI_SERVER_URL').'/api/sync', 'json', $body);
+            $server_data = CommonController::curl(config('app.ecoi_server_url').'/api/sync', 'json', $body);
 
             // if($type == 'users') {
             //     // dd($body, array_slice($server_data->data, 100), $server_data->data);
