@@ -126,24 +126,6 @@ class LoginController extends Controller
         try {
             $local_signature = Str::random(50);
 
-            Setting::insert([
-                [
-                    'name' => 'terminal_signature',
-                    'value' => $request->signature,
-                    'user_created' => 1,
-                    'user_modified' => 1,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ], [
-                    'name' => 'local_signature',
-                    'value' => $local_signature,
-                    'user_created' => 1,
-                    'user_modified' => 1,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ]
-            ]);
-
             $body = [
                 'terminal_signature' => $request->signature,
                 'local_signature' => $local_signature,
@@ -151,7 +133,26 @@ class LoginController extends Controller
     
             $server_data = CommonController::curl(config('app.ecoi_server_url').'/api/new-terminal', 'get', $body);
 
-            if($server_data) {
+            if($server_data && $server_data != '404') {
+                
+                Setting::insert([
+                    [
+                        'name' => 'terminal_signature',
+                        'value' => $request->signature,
+                        'user_created' => 1,
+                        'user_modified' => 1,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ], [
+                        'name' => 'local_signature',
+                        'value' => $local_signature,
+                        'user_created' => 1,
+                        'user_modified' => 1,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]
+                ]);
+
                 if(isset($server_data->status_code)) {
                     if($server_data->status_code == '401') {
                         Setting::truncate();
@@ -185,6 +186,17 @@ class LoginController extends Controller
             return view('input-terminal');
         }
 
+        session(['update-process' => collect([
+            ['name' => 'settings', 'status' => 'pending'],
+            ['name' => 'menus', 'status' => 'pending'],
+            ['name' => 'roles', 'status' => 'pending'],
+            ['name' => 'users', 'status' => 'pending'],
+            ['name' => 'regions', 'status' => 'pending'],
+            ['name' => 'areas', 'status' => 'pending'],
+            ['name' => 'branches', 'status' => 'pending'],
+            ['name' => 'prices', 'status' => 'pending'],
+        ])
+    ]);
         return view('initial-setup');
     }
 }
