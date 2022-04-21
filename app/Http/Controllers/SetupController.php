@@ -170,7 +170,7 @@ class SetupController extends Controller
                                     // ['name' => 'clean_up', 'status' => 'loading'],
                                 ]);
                             }
-                            break;
+                            // break;
                         }
                         // case 'clean_up': {
                         //     $result = UpdateController::sync('prices');
