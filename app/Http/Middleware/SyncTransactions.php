@@ -21,6 +21,7 @@ class SyncTransactions
         $transactions = Transaction::where('uploaded', false)->get();
 
         if($transactions->count()) {
+
             $terminal_signature = session('terminalSignature');
     
             foreach($transactions as $transaction) {
@@ -32,7 +33,7 @@ class SyncTransactions
                 'data' => json_encode($transactions->toArray()),
             ];
 
-            $server = CommonController::curl(env('ECOI_SERVER_URL').'/api/sync-transactions', 'post', $body);
+            $server = CommonController::curl(config('app.ecoi_server_url').'/api/sync-transactions', 'post', $body);
 
             if(isset($server->status_code)) {
                 if($server->status_code == 200 && isset($server->data)) {
