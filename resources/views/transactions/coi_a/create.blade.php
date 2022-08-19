@@ -75,68 +75,118 @@
                 </div>
                 {{-- PARENTS / SPOUSE --}}
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="guardian">Parents</label>
+                    <div class="form-group col-md-4">
+                        <label id="spouse_parents" for="guardian">Parents</label>
                         <input type="text" id="guardian" name="guardian" class="form-control text-uppercase @error('guardian') is-invalid @enderror" placeholder="Spouse / Parents" value="{{ old('guardian') }}" />
-                        @error('guardian') <div class="invalid-feedback">{{ str_replace('guardian', 'spouse/parent', str_replace('guardian dateofbirth', 'birth date', $message)) }} </div> @enderror
+                        @error('guardian') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <label for="relationship_1_1">Relationship</label>
+                        <select name="relationship_1_1" id="relationship_1_1" class="dependent_relationship_1 form-control @error('relationship_1_1') is-invalid @enderror">
+                            <option value="">- Select -</option>
+                            <option value="Father" @if(old('relationship_1_1') == 'Father') selected @endif>Father</option>
+                            <option value="Mother" @if(old('relationship_1_1') == 'Mother') selected @endif>Mother</option>
+                        </select>
+                        @error('relationship_1_1') <div class="invalid-feedback">{{ $message }} </div> @enderror
+                    </div>
+                    <div class="form-group col-md-4">
                         <label for="guardian_dateofbirth">Birth Dates <small>(18 - 70 yrs. old)</small></label>
                         <input type="date" id="guardian_dateofbirth" name="guardian_dateofbirth" class="form-control @error('guardian_dateofbirth') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('guardian_dateofbirth') }}" />
-                        @error('guardian_dateofbirth') <div class="invalid-feedback">{{ str_replace('guardian', 'spouse/parent', str_replace('guardian dateofbirth', 'birth date', $message)) }} </div> @enderror
+                        @error('guardian_dateofbirth') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
+                <div id="dependent_2nd_1" class="row">
+                    <div class="form-group col-md-4">
                         <input type="text" id="guardian2" name="guardian2" class="form-control text-uppercase @error('guardian2') is-invalid @enderror" placeholder="Spouse / Parents" value="{{ old('guardian2') }}" />
-                        @error('guardian2') <div class="invalid-feedback">{{ str_replace('guardian2', 'spouse/parent', str_replace('guardian dateofbirth2', 'birth date', $message)) }} </div> @enderror
+                        @error('guardian2') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <select name="relationship_1_2" id="relationship_1_2" class="dependent_relationship_1 form-control @error('relationship_1_2') is-invalid @enderror">
+                            <option value="">- Select -</option>
+                            <option value="Father" @if(old('relationship_1_2') == 'Father') selected @endif>Father</option>
+                            <option value="Mother" @if(old('relationship_1_2') == 'Mother') selected @endif>Mother</option>
+                        </select>
+                        @error('relationship_1_2') <div class="invalid-feedback">{{ $message }} </div> @enderror
+                    </div>
+                    <div class="form-group col-md-4">
                         <input type="date" id="guardian_dateofbirth2" name="guardian_dateofbirth2" class="form-control @error('guardian_dateofbirth2') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('guardian_dateofbirth2') }}" />
-                        @error('guardian_dateofbirth2') <div class="invalid-feedback">{{ str_replace('guardian2', 'spouse/parent', str_replace('guardian dateofbirth2', 'birth date', $message)) }} </div> @enderror
+                        @error('guardian_dateofbirth2') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>
                 {{-- CHILDREN / SIBLING --}}
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="child_siblings">Siblings</label>
+                    <div class="form-group col-md-4">
+                        <label id="child_siblings" for="child_siblings">Siblings</label>
                         <input type="text" id="child_siblings" name="child_siblings" class="form-control text-uppercase @error('child_siblings') is-invalid @enderror" placeholder="Children / Siblings" value="{{ old('child_siblings') }}" />
-                        @error('child_siblings') <div class="invalid-feedback">{{ str_replace('child siblings', 'child/siblings', str_replace('child siblings dateofbirth', 'birth date', $message)) }} </div> @enderror
+                        @error('child_siblings') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <label for="relationship_2_1">Relationship</label>
+                        <select name="relationship_2_1" id="relationship_2_1" class="dependent_relationship_2 form-control @error('relationship_2_1') is-invalid @enderror">
+                            <option value="">- Select -</option>
+                            <option value="Brother" @if(old('relationship_2_1') == 'Brother') selected @endif>Brother</option>
+                            <option value="Sister" @if(old('relationship_2_1') == 'Sister') selected @endif>Sister</option>
+                        </select>
+                        @error('relationship_2_1') <div class="invalid-feedback">{{ $message }} </div> @enderror
+                    </div>
+                    <div class="form-group col-md-4">
                         <label for="child_siblings_dateofbirth">Birth Dates <small>(1 - 21 yrs. old)</small></label>
                         <input type="date" id="child_siblings_dateofbirth" name="child_siblings_dateofbirth" class="form-control @error('child_siblings_dateofbirth') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('child_siblings_dateofbirth') }}" />
-                        @error('child_siblings_dateofbirth') <div class="invalid-feedback">{{ str_replace('child siblings', 'child/siblings', str_replace('child siblings dateofbirth', 'birth date', $message)) }} </div> @enderror
+                        @error('child_siblings_dateofbirth') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <input type="text" id="child_siblings2" name="child_siblings2" class="form-control text-uppercase @error('child_siblings2') is-invalid @enderror" placeholder="Children / Siblings" value="{{ old('child_siblings2') }}" />
-                        @error('child_siblings2') <div class="invalid-feedback">{{ str_replace('child siblings2', 'child/siblings', str_replace('child siblings dateofbirth2', 'birth date', $message)) }} </div> @enderror
+                        @error('child_siblings2') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <select name="relationship_2_2" id="relationship_2_2" class="dependent_relationship_2 form-control @error('relationship_2_2') is-invalid @enderror">
+                            <option value="">- Select -</option>
+                            <option value="Brother" @if(old('relationship_2_2') == 'Brother') selected @endif>Brother</option>
+                            <option value="Sister" @if(old('relationship_2_2') == 'Sister') selected @endif>Sister</option>
+                        </select>
+                        @error('relationship_2_2') <div class="invalid-feedback">{{ $message }} </div> @enderror
+                    </div>
+                    <div class="form-group col-md-4">
                         <input type="date" id="child_siblings_dateofbirth2" name="child_siblings_dateofbirth2" class="form-control @error('child_siblings_dateofbirth2') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('child_siblings_dateofbirth2') }}" />
-                        @error('child_siblings_dateofbirth2') <div class="invalid-feedback">{{ str_replace('child siblings2', 'child/siblings', str_replace('child siblings dateofbirth2', 'birth date', $message)) }} </div> @enderror
+                        @error('child_siblings_dateofbirth2') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <input type="text" id="child_siblings3" name="child_siblings3" class="form-control text-uppercase @error('child_siblings3') is-invalid @enderror" placeholder="Children / Siblings" value="{{ old('child_siblings3') }}" />
-                        @error('child_siblings3') <div class="invalid-feedback">{{ str_replace('child siblings3', 'child/siblings', str_replace('child siblings dateofbirth3', 'birth date', $message)) }} </div> @enderror
+                        @error('child_siblings3') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <select name="relationship_2_3" id="relationship_2_3" class="dependent_relationship_2 form-control @error('relationship_2_3') is-invalid @enderror">
+                            <option value="">- Select -</option>
+                            <option value="Brother" @if(old('relationship_2_3') == 'Brother') selected @endif>Brother</option>
+                            <option value="Sister" @if(old('relationship_2_3') == 'Sister') selected @endif>Sister</option>
+                        </select>
+                        @error('relationship_2_3') <div class="invalid-feedback">{{ $message }} </div> @enderror
+                    </div>
+                    <div class="form-group col-md-4">
                         <input type="date" id="child_siblings_dateofbirth3" name="child_siblings_dateofbirth3" class="form-control @error('child_siblings_dateofbirth3') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('child_siblings_dateofbirth3') }}" />
-                        @error('child_siblings_dateofbirth3') <div class="invalid-feedback">{{ str_replace('child siblings3', 'child/siblings', str_replace('child siblings dateofbirth3', 'birth date', $message)) }} </div> @enderror
+                        @error('child_siblings_dateofbirth3') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <input type="text" id="child_siblings4" name="child_siblings4" class="form-control text-uppercase @error('child_siblings4') is-invalid @enderror" placeholder="Children / Siblings" value="{{ old('child_siblings4') }}" />
-                        @error('child_siblings4') <div class="invalid-feedback">{{ str_replace('child siblings4', 'child/siblings', str_replace('child siblings dateofbirth4', 'birth date', $message)) }} </div> @enderror
+                        @error('child_siblings4') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <select name="relationship_2_4" id="relationship_2_4" class="dependent_relationship_2 form-control @error('relationship_2_4') is-invalid @enderror">
+                            <option value="">- Select -</option>
+                            <option value="Brother" @if(old('relationship_2_4') == 'Brother') selected @endif>Brother</option>
+                            <option value="Sister" @if(old('relationship_2_4') == 'Sister') selected @endif>Sister</option>
+                        </select>
+                        @error('relationship_2_4') <div class="invalid-feedback">{{ $message }} </div> @enderror
+                    </div>
+                    <div class="form-group col-md-4">
                         <input type="date" id="child_siblings_dateofbirth4" name="child_siblings_dateofbirth4" class="form-control @error('child_siblings_dateofbirth4') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('child_siblings_dateofbirth4') }}" />
-                        @error('child_siblings_dateofbirth4') <div class="invalid-feedback">{{ str_replace('child siblings4', 'child/siblings', str_replace('child siblings dateofbirth4', 'birth date', $message)) }} </div> @enderror
+                        @error('child_siblings_dateofbirth4') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>
             </div>
@@ -151,15 +201,41 @@
     </div>
 </div>
 @endsection
+
 @section('more-scripts')
 <script defer>
     $('#civil_status input').click(function() {
+        var $dr1 = $('.dependent_relationship_1');
+        $dr1.children().remove();
+        $dr1.append($('<option />').val('').text('- Select -'));
+
+        var $dr2 = $('.dependent_relationship_2');
+        $dr2.children().remove();
+        $dr2.append($('<option />').val('').text('- Select -'));
+
         if($('#single').is(':checked')) {
+
             $('#spouse_parents').html('Parents');
             $('#child_siblings').html('Siblings');
+            
+            $('#dependent_2nd_1').show();
+            
+            $dr1.append($('<option />').val('Father').text('Father'));
+            $dr1.append($('<option />').val('Mother').text('Mother'));
+            $dr2.append($('<option />').val('Brother').text('Brother'));
+            $dr2.append($('<option />').val('Sister').text('Sister'));
+
         } else if($('#married').is(':checked')) {
+
             $('#spouse_parents').html('Spouse');
             $('#child_siblings').html('Children');
+
+            $('#dependent_2nd_1').hide();
+
+            $dr1.append($('<option />').val('Husband').text('Husband'));
+            $dr1.append($('<option />').val('Wife').text('Wife'));
+            $dr2.append($('<option />').val('Children').text('Children'));
+
         }
     });
 </script>

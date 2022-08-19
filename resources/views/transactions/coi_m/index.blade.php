@@ -1,20 +1,20 @@
 @extends('layouts.app')
-@section('search', route('coi_b.search'))
+@section('search', route('coi_m.search'))
 @section('header')
     <div class="row align-items-center py-4">
         <div class="col-7 col-lg-6">
-            <h6 class="h2 text-white d-inline-block mb-0">Pinoy Protect Plus</h6>
+            <h6 class="h2 text-white d-inline-block mb-0">Mediphone</h6>
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="ni ni-tv-2"></i></a></li>
                 <li class="breadcrumb-item">Transaction</li>
-                <li class="breadcrumb-item active" aria-current="page">Pinoy Protect Plus</li>
+                <li class="breadcrumb-item active" aria-current="page">Mediphone</li>
                 </ol>
             </nav>
         </div>
         <div class="col-5 col-lg-6 text-right">
-            <a href="{{ route('coi_b.create') }}" class="btn btn-sm btn-neutral loading">Add</a>
-            <a href="{{ route('coi_b.index') }}" class="btn btn-sm btn-neutral loading">Show All</a>
+            <a href="{{ route('coi_m.create') }}" class="btn btn-sm btn-neutral loading">Add</a>
+            <a href="{{ route('coi_m.index') }}" class="btn btn-sm btn-neutral loading">Show All</a>
         </div>
     </div>
 @endsection
@@ -25,9 +25,11 @@
                 <thead class="thead-light">
                     <tr>
                         <th>COI Number</th>
-                        <th>BOS Entry No</th>
-                        <th>Policy Number</th>
-                        <th>Insured Name</th>
+                        <th>Name of Member</th>
+                        {{-- <th>Contact Number</th> --}}
+                        {{-- <th>Email Address</th> --}}
+                        <th>Beneficiary's Name</th>
+                        <th>Relationship</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -35,19 +37,21 @@
                     @if(count($transactions) > 0)
                         @foreach($transactions as $transaction)
                             <tr @if($transaction->status == 'edited') class="table-primary" data-toggle="tooltip" data-placement="bottom" title="This record has been modified" @endif>
-                                <td>{{$transaction->terminal_coi_number}}</td>
-                                <td>{{$transaction->bos_entry_number}}</td>
-                                <td>{{$transaction->policy_number}}</td>
-                                <td>{{$transaction->insured_name}}</td>
+                                <td>{{ $transaction->coi_number }}</td>
+                                <td>{{ $transaction->insured_name }}</td>
+                                {{-- <td>{{ $transaction->contact_number }}</td> --}}
+                                {{-- <td>{{ $transaction->email }}</td> --}}
+                                <td>{{ $transaction->beneficiary }}</td>
+                                <td>{{ $transaction->relationship }}</td>
                                 <td class="text-center">
                                     @if($transaction->posted == NULL)
-                                        <a href="{{ route('coi_b.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-warning loading" >Edit</a>  
-                                        <a href="{{ route('coi_b.post', Crypt::encrypt($transaction->id)) }}" onclick="return confirm('Are you sure you want to Post this transaction?')" class="btn btn-sm btn-primary" >Post</a>
+                                        <a href="{{ route('coi_m.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-warning loading" >Edit</a>  
+                                        <a href="{{ route('coi_m.post', Crypt::encrypt($transaction->id)) }}" onclick="return confirm('Are you sure you want to Post this transaction?')" class="btn btn-sm btn-primary" >Post</a>
                                     @else
-                                        <a href="{{ route('coi_b.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-warning disabled" disabled>Edit</a>  
-                                        <a href="{{ route('coi_b.print', Crypt::encrypt($transaction->id)) }}" target="_blank" class="btn btn-sm btn-danger" >Print</a>
+                                        <a href="{{ route('coi_m.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-warning disabled" disabled>Edit</a>  
+                                        <a href="{{ route('coi_m.print', Crypt::encrypt($transaction->id)) }}" target="_blank" class="btn btn-sm btn-danger" >Print</a>
                                     @endif
-                                    <a href="{{ route('coi_b.show', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-success loading" >Show</a>
+                                    <a href="{{ route('coi_m.show', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-success loading" >Show</a>
                                 </td>
                             </tr>
                         @endforeach

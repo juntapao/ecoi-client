@@ -15,6 +15,8 @@ class Transaction extends Model
         'child_siblings_dateofbirth2',
         'child_siblings_dateofbirth3',
         'child_siblings_dateofbirth4',
+        'dateofbirth',
+        'date_issued',
     ];
 
     protected $fillable = ['coi_number','policy_number','bos_entry_number',
@@ -44,5 +46,10 @@ class Transaction extends Model
         return $this->belongsTo('App\User', 'userid_created');
         // 'userid_created', 'id'
         // 'id', 'userid_created'
+    }
+
+    public function dependents()
+    {
+        return $this->hasMany('App\Dependent');
     }
 }

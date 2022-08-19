@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('search', route('coi_ao.search'))
-@section('delete', route('coi_ao.destroy', $transaction->id))
+@section('delete', route('coi_ao.destroy', Crypt::encrypt($transaction->id)))
 @section('header')
     <div class="row align-items-center py-4">
         <div class="col-7 col-lg-6">
@@ -17,7 +17,7 @@
         <div class="col-5 col-lg-6 text-right">
             <a href="{{ route('coi_ao.create') }}" class="btn btn-sm btn-neutral loading">Add</a>
             @if($transaction->posted == null)
-                <a href="{{ route('coi_ao.edit', $transaction->id) }}" class="btn btn-sm btn-neutral loading">Edit</a>
+                <a href="{{ route('coi_ao.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-neutral loading">Edit</a>
                 <button data-toggle="modal" data-target="#delete" class="btn btn-sm btn-neutral">Delete</button>
             @endif
             <a href="{{ route('coi_ao.index') }}" class="btn btn-sm btn-neutral loading">Show All</a>
@@ -70,10 +70,10 @@
         </div>
         <div class="text-right">
             {{-- <a href="{{ route('coi_ao.index') }}" class="btn btn-primary">Cancel</a> --}}
-            @if($transaction->posted)
-                <a href="{{ route('coi_ao.print', $transaction->id) }}" class="btn btn-success">Print</a>
+            @if($transaction->posted == null)
+                <a href="{{ route('coi_ao.post', Crypt::encrypt($transaction->id)) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
             @else
-                <a href="{{ route('coi_ao.post', $transaction->id) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
+                <a href="{{ route('coi_ao.print', Crypt::encrypt($transaction->id)) }}" class="btn btn-success">Print</a>
             @endif
         </div>
     </div>

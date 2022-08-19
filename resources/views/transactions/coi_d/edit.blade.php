@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('search', route('coi_d.search'))
-@section('delete', route('coi_d.destroy', $transaction->id))
+@section('delete', route('coi_d.destroy', Crypt::encrypt($transaction->id)))
 @section('header')
     <div class="row align-items-center py-4">
         <div class="col-7 col-lg-6">
@@ -16,7 +16,7 @@
         </div>
         <div class="col-5 col-lg-6 text-right">
             <a href="{{ route('coi_d.create') }}" class="btn btn-sm btn-neutral loading">Add</a>
-            <a href="{{ route('coi_d.show', $transaction->id) }}" class="btn btn-sm btn-neutral loading">Show</a>
+            <a href="{{ route('coi_d.show', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-neutral loading">Show</a>
             <button data-toggle="modal" data-target="#delete" class="btn btn-sm btn-neutral">Delete</button>
             <a href="{{ route('coi_d.index') }}" class="btn btn-sm btn-neutral loading">Show All</a>
         </div>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="card-header border-0">
-        <form  method="POST" action="{{ route('coi_d.update', ['id' => $transaction->id]) }}">
+        <form  method="POST" action="{{ route('coi_d.update', ['id' => Crypt::encrypt($transaction->id)]) }}">
             @method('patch')
             @csrf
             <div class="container">
@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="dateofbirth">Date of Birth</label>
-                        <input type="date" id="dateofbirth" name="dateofbirth" class="form-control @error('dateofbirth') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('dateofbirth', $transaction->dateofbirth) }}" />
+                        <input type="date" id="dateofbirth" name="dateofbirth" class="form-control @error('dateofbirth') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('dateofbirth', $transaction->dateofbirth->format('Y-m-d')) }}" />
                         @error('dateofbirth') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>

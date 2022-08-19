@@ -40,15 +40,14 @@
                                 <td>{{$transaction->policy_number}}</td>
                                 <td>{{$transaction->insured_name}}</td>
                                 <td class="text-center">
-                                    @if($transaction->posted)
-                                        <a href="{{ route('coi_r.edit', $transaction->id) }}" class="btn btn-sm btn-warning disabled" disabled>Edit</a>  
-                                        <a href="{{ route('coi_r.print', $transaction->id) }}" target="_blank" class="btn btn-sm btn-danger" >Print</a>
+                                    @if($transaction->posted == NULL)
+                                        <a href="{{ route('coi_r.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-warning loading" >Edit</a>  
+                                        <a href="{{ route('coi_r.post', Crypt::encrypt($transaction->id)) }}" onclick="return confirm('Are you sure you want to Post this transaction?')" class="btn btn-sm btn-primary" >Post</a>
                                     @else
-                                        <a href="{{ route('coi_r.edit', $transaction->id) }}" class="btn btn-sm btn-warning loading" >Edit</a>  
-                                        {{-- <a href="{{ route('coi_r.post', $transaction->id) }}" onclick="return confirm('Are you sure you want to Post this transaction?')" class="btn btn-sm btn-primary" >Post</a> --}}
-                                        <a href="{{ route('coi_r.show', $transaction->id) }}" class="btn btn-sm btn-primary loading">Post</a>
+                                        <a href="{{ route('coi_r.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-warning disabled" disabled>Edit</a>  
+                                        <a href="{{ route('coi_r.print', Crypt::encrypt($transaction->id)) }}" target="_blank" class="btn btn-sm btn-danger" >Print</a>
                                     @endif
-                                    <a href="{{ route('coi_r.show', $transaction->id) }}" class="btn btn-sm btn-success loading" >Show</a>
+                                    <a href="{{ route('coi_r.show', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-success loading" >Show</a>
                                 </td>
                             </tr>
                         @endforeach

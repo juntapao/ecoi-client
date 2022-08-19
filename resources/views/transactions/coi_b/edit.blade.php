@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('search', route('coi_b.search'))
-@section('delete', route('coi_b.destroy', $transaction->id))
+@section('delete', route('coi_b.destroy', Crypt::encrypt($transaction->id)))
 @section('header')
     <div class="row align-items-center py-4">
         <div class="col-7 col-lg-6">
@@ -16,7 +16,7 @@
         </div>
         <div class="col-5 col-lg-6 text-right">
             <a href="{{ route('coi_b.create') }}" class="btn btn-sm btn-neutral loading">Add</a>
-            <a href="{{ route('coi_b.show', $transaction->id) }}" class="btn btn-sm btn-neutral loading">Show</a>
+            <a href="{{ route('coi_b.show', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-neutral loading">Show</a>
             <button data-toggle="modal" data-target="#delete" class="btn btn-sm btn-neutral">Delete</button>
             <a href="{{ route('coi_b.index') }}" class="btn btn-sm btn-neutral loading">Show All</a>
         </div>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="card-header border-0">
-        <form  method="POST" action="{{ route('coi_b.update', ['id' => $transaction->id]) }}">
+        <form  method="POST" action="{{ route('coi_b.update', ['id' => Crypt::encrypt($transaction->id)]) }}">
             @method('patch')
             @csrf
             <div class="container">

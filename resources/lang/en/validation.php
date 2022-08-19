@@ -145,6 +145,25 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'guardian_dateofbirth' => 'date of birth',
+        'guardian_dateofbirth2' => 'date of birth',
+        'child_siblings_dateofbirth' => 'date of birth',
+        'child_siblings_dateofbirth2' => 'date of birth',
+        'child_siblings_dateofbirth3' => 'date of birth',
+        'child_siblings_dateofbirth4' => 'date of birth',
+        'guardian' => 'spouse/parent',
+        'guardian2' => 'spouse/parent',
+        'child_siblings' => 'child/sibling',
+        'child_siblings2' => 'child/sibling',
+        'child_siblings3' => 'child/sibling',
+        'child_siblings4' => 'child/sibling',
+        'relationship_1_1' => 'relationship',
+        'relationship_1_2' => 'relationship',
+        'relationship_2_1' => 'relationship',
+        'relationship_2_2' => 'relationship',
+        'relationship_2_3' => 'relationship',
+        'relationship_2_4' => 'relationship',
+    ],
 
 ];

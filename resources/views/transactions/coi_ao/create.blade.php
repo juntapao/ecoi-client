@@ -61,11 +61,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <input name="coi_number" id="coi_number" type="hidden" value="{{$policy_series->coi_no}}"> --}}
-            {{-- <input name="date_issued" id="date_issued" type="hidden" value="{{$datenow}}"> --}}
-            {{-- <input name="policyno" id="policyno" type="hidden" value="MM-03-{{$polyear}}-CB-{{$policy_series->series}}"> --}}
             <div class="text-right">
-                {{-- <a href="{{ route('coi_ao.index') }}" class="btn btn-danger">Cancel</a> --}}
                 <button type="submit" class="btn btn-success loading">Save</button>
             </div>
         </form>

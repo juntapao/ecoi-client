@@ -59,10 +59,7 @@
             <td width = "5%"></td>
             <td width = "30%" align="left">Additional Insured</td>
             <td width = "10%">:</td>
-            <td width = "25%">1.{{$transaction->child_siblings}}</td>
-            <td width = "25%">
-               {{ $transaction->child_siblings_dateofbirth ? Carbon\Carbon::parse($transaction->child_siblings_dateofbirth)->format('m/d/Y') : null }}
-            </td>
+            <td width = "55%"><b>Not Applicable</b></td>
         </tr>
         <tr class="font10">
             <td width = "5%"></td>
@@ -100,7 +97,7 @@
         </tr>
         <tr class="font10 bord">
             <td width = "5%" style="border:none;"></td>
-            <td width = "40%" align="left">Motorcycling</td>
+            <td width = "40%" align="left">Motorcycling Benefit</td>
             <td width = "17%">PHP {{$holder['motor_principal']}}</td>
         </tr>
         <tr class="font10 bord">
@@ -115,31 +112,31 @@
         </tr>
         <tr class="font10 bord">
             <td width = "5%" style="border:none;"></td>
-            <td width = "40%" align="left">Educational Assistance</td>
+            <td width = "40%" align="left">Educational Assistance as a result of:</td>
             <td width = "17%"></td>
         </tr>
         <tr class="font10 bord">
             <td width = "5%" style="border:none;"></td>
-            <td width = "40%" align="left">Accidental Death</td>
+            <td width = "40%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accidental Death</td>
             <td width = "17%">PHP {{$holder['accidental']}}</td>
         </tr>
         <tr class="font10 bord">
             <td width = "5%" style="border:none;"></td>
-            <td width = "40%" align="left">Death due to Sickness</td>
+            <td width = "40%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Death due to Sickness</td>
             <td width = "17%">PHP {{$holder['sickness']}}</td>
         </tr>
         <tr><td></td></tr>
         <tr class="font10"> 
             <td width = "5%"></td>
             <td width = "30%">Period of Insurance</td>
-            <td width = "20%">:</td>
-            <td width = "20%"></td>
+            <td width = "10%">:</td>
+            <td width = "55%">{{ $transaction->date_issued->format('F d, Y') }} to {{ $transaction->date_issued->addYear()->format('F d, Y') }}</td>
         </tr>    
         <tr class="font10">
             <td width = "5%"></td>
             <td width = "30%">Total Premium</td>
             <td width = "10%">:</td>
-            <td width = "20%">PHP {{ number_format(($transaction->price * intval($transaction->units)), 2)}}</td>
+            <td width = "55%">PHP {{ number_format(($transaction->price * intval($transaction->units)), 2)}}</td>
         </tr>
         <tr><td></td></tr>
         <tr class="font8">
@@ -194,46 +191,9 @@
         </tr>
         <tr>
             <td width="5%"></td>
-            <td width="90%"><p style="font-size:8px;">When injury results in any of the following losses within one hundred eighty (180) days after the date of the accident, the Company will pay for the loss of:</p></td>
-            <td width="5%"></td>
-        </tr>
-        <tr><td></td></tr>
-        <tr class="spacing">
-            <td width="10%"></td>
-            <td width="45%">Both Hands or Both Feet or Sight of Both Eyes .............................</td>
-            <td width="5%"></td>
-            <td>100% of the Principal Sum</td>
-        </tr>
-        <tr>
-            <td width="10%"></td>
-            <td width="45%">One hands and One Foot ...............................................................</td>
-            <td width="5%"></td>
-            <td>100% of the Principal Sum</td>
-        </tr>
-        <tr>
-            <td width="10%"></td>
-            <td>Either Hand or Foot and Sight of One Eye .....................................</td>
-            <td width="5%"></td>
-            <td>100% of the Principal Sum</td>
-        </tr>
-        <tr>
-            <td width="10%"></td>
-            <td>Either Hand or Foot ........................................................................</td>
-            <td width="5%"></td>
-            <td>50% of the Principal Sum</td>
-        </tr>
-        <tr>
-            <td width="10%"></td>
-            <td>Both Thumb and index Finger of Either Hand ................................</td>
-            <td width="5%"></td>
-            <td>10% of the Principal Sum</td>
-        </tr>
-        <tr>
-            <td width="100%"></td>
-        </tr>
-        <tr>
-            <td width="5%"></td>
-            <td width="90%" style="text-align: justify;">The occurrence of any specific loss for which the corresponding indemnity provided above is payable to the Named Insured at no less than 100% of the Principal Sum Insured, shall at once terminate all insurance under the policy with respect to said Named Insured, but such termination shall be without prejudice to any claim originating out of the accident causing such loss.</td>
+            <td width="90%" align="justify"><p style="font-size:8px;">If within 180 days from the date of the accident, such injuries shall result in loss of life or any of the following loss, the Company will pay based on the schedule of indemnity. This schedule of indemnity is available upon request.<br />With respect to Coverage A & B, the aggregate benefits payable in respect of any one accident resulting in losses within 180 days from the date of accident shall not exceed the Principal Sum. However, any partial benefit already paid for any losses shall not be carried over in the subsequent policy years.</p>
+                <p style="font-size:8px;">In any policy year, the aggregate benefits payable under Coverage B in respect of one or more accidents resulting in losses within 180 days from the date of accident shall not exceed the Principal Sum. For subsequent accident resulting in losses which would make the aggregate benefits exceed the Principal Sum, the amount payable under Coverage B shall be the Principal Sum less the amounts paid for previous losses. However, the payment of the Principal Sum for such losses under Coverage B shall not terminate Coverage A. The aggregate benefits payable under Coverage A & B in respect of an independent and unrelated accident if death arises within 180 days from such accident shall always be the Principal Sum.</p>
+            </td>
             <td width="5%"></td>
         </tr>
         <tr>
@@ -300,205 +260,5 @@
         </tr>
         <tr><td width="100%"></td></tr>
         <tr><td width="100%"></td></tr>
-    </table>
-</div>
-<div class="container">
-    <table class="tb1" style="font-size:10px;">
-        <tr>
-            <td>NOTES:</td>
-        </tr>
-        <tr>
-            <td>
-                1.	Additional Insured – Shows only if product type is Family Protect Plus<br>
-                2.	Values for Group Policy Holder/ Policy No. –
-            </td>
-        </tr>    
-        <tr>
-            <td width="5%"></td>
-            <td>
-                a.	ML Pawner’s Protect Program – MM-03-20-CB-000564<br>
-                b.	ML Family Protect Program – MM-03-20-CB-000967<br>
-                c.	ML KP Protect Program– MM-03-21-CB-000076<br>
-                d.	ML Pinoy Protect Plus – MM-03-20-CB-000563<br>
-                e.	ML Family Protect Plus – MM-03-20-CB-000565<br>
-            </td>
-        </tr>    
-        <tr>
-            <td width="100%">
-                3.	Table of Schedule of Benefits
-            </td>
-        </tr> 
-        <tr>
-            <td width="5%"></td>
-            <td width="90%">
-                <table width="100%" border="1" style="font-size: 10px;">
-                    <tr>
-                        <th>Limits</th>
-                        <th>KP Protect</th>
-                        <th>Pawner's Protect</th>
-                        <th>Family Protect</th>
-                        <th>Pinoy Protect +</th>
-                        <th>Family Protect +</th>
-                    </tr>
-                    <tr>
-                        <td>Accidental Death and Permanent Disablement</td>
-                        <td>P20,000 – P100,000</td>
-                        <td>P30,000 – P150,000</td>
-                        <td>P30,000 – P150,000</td>
-                        <td>P30,000 – P150,000</td>
-                        <td>P30,000 – P150,000</td>
-                    </tr>
-                    <tr>
-                        <td>Unprovoked Murder & Assault</td>
-                        <td>P20,000 – P40,000</td>
-                        <td>P30,000 – P60,000</td>
-                        <td>P30,000 – P60,000</td>
-                        <td>P30,000 – P60,000</td>
-                        <td>P30,000 – P60,000</td>
-                    </tr>
-                    <tr>
-                        <td>Motorcycling Benefit</td>
-                        <td>P20,000</td>
-                        <td>P30,000</td>
-                        <td>P30,000</td>
-                        <td>P30,000-60,000</td>
-                        <td>P30,000-60,000</td>
-                    </tr>
-                    <tr>
-                        <td>Accidental Burial Benefit</td>
-                        <td>n/a</td>
-                        <td>n/a</td>
-                        <td>P10,000</td>
-                        <td>P10,000</td>
-                        <td>P10,000</td>
-                    </tr>
-                    <tr>
-                        <td>Cash Assistance</td>
-                        <td>n/a</td>
-                        <td>n/a</td>
-                        <td>n/a</td>
-                        <td>P10,000</td>
-                        <td>P10,000</td>
-                    </tr>
-                    <tr>
-                        <td>Educational Assistance</td>
-                        <td>n/a</td>
-                        <td>n/a</td>
-                        <td>n/a</td>
-                        <td>If Accidental Death, P25,000/ if Death due to Sickness, P12,500</td>
-                        <td>n/a</td>
-                    </tr>
-                    <tr>
-                        <td>Fire Assistance</td>
-                        <td>n/a</td>
-                        <td>n/a</td>
-                        <td>n/a</td>
-                        <td>n/a</td>
-                        <td>P5,000</td>
-                    </tr>
-                </table>
-            </td>
-            <td width="5%"></td>
-        </tr>
-        <tr><td></td></tr>
-        <tr>
-            <td width="5%"></td>
-            <td width="95%">Note: </td>
-        </tr> 
-        <tr>
-            <td width="5%"></td>
-            <td width="95%">1.	Only Family Protect+ covers Insureds Dependents</td>
-        </tr> 
-        <tr><td></td></tr>
-        <tr>
-            <td width="5%"></td>
-            <td width="90%">
-                <table width="100%" border="1" style="font-size: 10px;">
-                    <tr>
-                        <td>Spouse</td>
-                        <td>50% of the limit of the Main Insured</td>
-                    </tr>
-                    <tr>
-                        <td>Each Surviving Dependent Parent</td>
-                        <td>50% of the limit of the Main Insured</td>
-                    </tr>
-                    <tr>
-                        <td>Each for Both Surviving Parents</td>
-                        <td>50% of the limit of the Main Insured</td>
-                    </tr>
-                    <tr>
-                        <td>Each Children/ Sibling</td>
-                        <td>50% of the limit of the Main Insured</td>
-                    </tr>
-                </table>
-            </td>
-            <td width="5%"></td>
-        </tr> 
-        <tr><td></td></tr>
-        <tr>
-            <td width="5%"></td>
-            <td width="90%" style="text-align: justify;">2.	Pawner’s Protect - Ages 66 to 70 years old are covered up to 50% of the benefit limits stated in the master policy</td>
-            <td width="5%"></td>
-        </tr> 
-        <tr>
-            <td width="5%"></td>
-            <td width="90%" style="text-align: justify;">3.	Family Protect - Ages 7 to 17 years old and 71 to 75 years old are covered up to 50% of the benefit limits stated in the master policy</td>
-            <td width="5%"></td>
-        </tr> 
-        <tr>
-            <td width="5%"></td>
-            <td width="90%" style="text-align: justify;">4.	Pinoy Protect Plus - Ages 71 to 75 years old are covered up to 50% of the benefit limits stated in the master policy and <strong>no Cash Assistance Benefit</strong></td>
-            <td width="5%"></td>
-        </tr> 
-        <tr>
-            <td width="5%"></td>
-            <td width="90%" style="text-align: justify;">5.	Family Protect Plus - - Ages 71 to 75 years old are covered up to 50% of the benefit limits stated in the master policy and <strong>no Cash Assistance Benefit.</strong></td>
-            <td width="5%"></td>
-        </tr> 
-        <tr><td></td></tr>
-        <tr>
-            <td width="100%">
-                4.	Period of Insurance
-            </td>
-        </tr> 
-        <tr><td></td></tr>
-        <tr>
-            <td width="5%"></td>
-            <td width="90%">
-                <table width="100%" border="1" style="font-size: 10px;">
-                    <tr>
-                        <td>Pawner's Protect</td>
-                        <td>4 Months</td>
-                    </tr>
-                    <tr>
-                        <td>Family Protect</td>
-                        <td>1 Year</td>
-                    </tr>
-                    <tr>
-                        <td>KP Protect</td>
-                        <td>30 Days</td>
-                    </tr>
-                    <tr>
-                        <td>Pinoy Protect +</td>
-                        <td>1 Year</td>
-                    </tr>
-                    <tr>
-                        <td>Family Protect +</td>
-                        <td>1 Year</td>
-                    </tr>
-                </table>
-            </td>
-            <td width="5%"></td>
-        </tr> 
-        <tr><td></td></tr>
-        <tr>
-            <td width="100%">
-                5.	Total Premium – automatically calculates depending on no. of units; maximum of 5 units
-            </td>
-        </tr> 
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
     </table>
 </div>

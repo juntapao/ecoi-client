@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('search', route('coi_a.search'))
-@section('delete', route('coi_a.destroy', $transaction->id))
+@section('delete', route('coi_a.destroy', Crypt::encrypt($transaction->id)))
 @section('header')
     <div class="row align-items-center py-4">
         <div class="col-7 col-lg-6">
@@ -17,7 +17,7 @@
         <div class="col-5 col-lg-6 text-right">
             <a href="{{ route('coi_a.create') }}" class="btn btn-sm btn-neutral loading">Add</a>
             @if($transaction->posted == null)
-                <a href="{{ route('coi_a.edit', $transaction->id) }}" class="btn btn-sm btn-neutral loading">Edit</a>
+                <a href="{{ route('coi_a.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-neutral loading">Edit</a>
                 <button data-toggle="modal" data-target="#delete" class="btn btn-sm btn-neutral">Delete</button>
             @endif
             <a href="{{ route('coi_a.index') }}" class="btn btn-sm btn-neutral loading">Show All</a>
@@ -82,65 +82,85 @@
             </div>
             {{-- PARENTS / SPOUSE --}}
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label>Parents</label>
                     <input type="text" class="form-control" value="{{ $transaction->guardian }}" readonly />
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label>Relationship</label>
+                    <input type="text" class="form-control" value="{{ $transaction->dependents->where('field', '1_1')->first() ? $transaction->dependents->where('field', '1_1')->first()->relationship : '' }}" readonly />
+                </div>
+                <div class="form-group col-md-4">
                     <label>Birth Dates <small>(18 - 70 yrs. old)</small></label>
                     <input type="text" class="form-control" value="{{ $transaction->guardian_dateofbirth ? Carbon\Carbon::parse($transaction->guardian_dateofbirth)->format('m/d/Y') : null }}" readonly />
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <input type="text" class="form-control" value="{{ $transaction->guardian2 }}" readonly />
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" value="{{ $transaction->dependents->where('field', '1_2')->first() ? $transaction->dependents->where('field', '1_2')->first()->relationship : '' }}" readonly />
+                </div>
+                <div class="form-group col-md-4">
                     <input type="text" class="form-control" value="{{ $transaction->guardian_dateofbirth2 ? Carbon\Carbon::parse($transaction->guardian_dateofbirth2)->format('m/d/Y') : null }}" readonly />
                 </div>
             </div>
             {{-- CHILDREN / SIBLING --}}
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label>Siblings</label>
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings }}" readonly />
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label>Relationship</label>
+                    <input type="text" class="form-control" value="{{ $transaction->dependents->where('field', '2_1')->first() ? $transaction->dependents->where('field', '2_1')->first()->relationship : '' }}" readonly />
+                </div>
+                <div class="form-group col-md-4">
                     <label>Birth Dates <small>(1 - 21 yrs. old)</small></label>
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings_dateofbirth ? Carbon\Carbon::parse($transaction->child_siblings_dateofbirth)->format('m/d/Y') : null }}" readonly />
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings2 }}" readonly />
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" value="{{ $transaction->dependents->where('field', '2_2')->first() ? $transaction->dependents->where('field', '2_2')->first()->relationship : '' }}" readonly />
+                </div>
+                <div class="form-group col-md-4">
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings_dateofbirth2 ? Carbon\Carbon::parse($transaction->child_siblings_dateofbirth2)->format('m/d/Y') : null }}" readonly />
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings3 }}" readonly />
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" value="{{ $transaction->dependents->where('field', '2_3')->first() ? $transaction->dependents->where('field', '2_3')->first()->relationship : '' }}" readonly />
+                </div>
+                <div class="form-group col-md-4">
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings_dateofbirth3 ? Carbon\Carbon::parse($transaction->child_siblings_dateofbirth3)->format('m/d/Y') : null }}" readonly />
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings4 }}" readonly />
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" value="{{ $transaction->dependents->where('field', '2_4')->first() ? $transaction->dependents->where('field', '2_4')->first()->relationship : '' }}" readonly />
+                </div>
+                <div class="form-group col-md-4">
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings_dateofbirth4 ? Carbon\Carbon::parse($transaction->child_siblings_dateofbirth4)->format('m/d/Y') : null }}" readonly />
                 </div>
             </div>
         </div>
         <div class="text-right">
             {{-- <a href="{{ route('coi_a.index') }}" class="btn btn-primary">Cancel</a> --}}
-            @if($transaction->posted)
-                <a href="{{ route('coi_a.print', $transaction->id) }}" class="btn btn-success">Print</a>
+            @if($transaction->posted == null)
+                <a href="{{ route('coi_a.post', Crypt::encrypt($transaction->id)) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
             @else
-                <a href="{{ route('coi_a.post', $transaction->id) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
+                <a href="{{ route('coi_a.print', Crypt::encrypt($transaction->id)) }}" class="btn btn-success">Print</a>
             @endif
         </div>
     </div>

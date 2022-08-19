@@ -17,26 +17,35 @@
             <a href="{{ route('posted.index') }}" class="btn btn-sm btn-neutral loading">Show All</a>
         </div>
     </div>
-    <form action="{{ route('posted.filter') }}" method="get">
-        <div class="row container">
-            <div class="form-group col-12 col-md-4 col-lg-3">
-                <strong class="text-secondary">Date From</strong>
-                <input type="date" id="date_from" name="date_from" class="form-control @error('date_from') is-invalid @enderror" value="{{ isset($date_from) ? $date_from : old('date_from') }}" />
-                {{-- <input type="date" id="date_from" name="date_from" class="form-control @error('date_from') is-invalid @enderror" value="{{ $date_from }}" /> --}}
-                {{-- @error('date_from') <div class="invalid-feedback">{{ $message }} </div> @enderror --}}
-            </div>
-            <div class="form-group col-12 col-md-4 col-lg-3">
-                <strong class="text-secondary">Date To</strong>
-                <input type="date" id="date_to" name="date_to" class="form-control @error('date_to') is-invalid @enderror" value="{{ isset($date_to) ? $date_to : old('date_to') }}" />
-                {{-- @error('date_to') <div class="invalid-feedback">{{ $message }} </div> @enderror --}}
-            </div>
-            <div class="col-12 col-md-4 col-lg-3"><br />
-                <button type="submit" class="btn btn-success loading">Filter</button>
+    <div class="row container">
+        <div class="form-group col-12 col-md-4 col-lg-3">
+            <strong class="text-secondary">Date From</strong>
+            <input type="date" id="date_from" class="form-control @error('date_from') is-invalid @enderror" value="{{ isset($date_from) ? $date_from : old('date_from') }}" />
+            @error('date_from') <div class="invalid-feedback">{{ $message }} </div> @enderror
+        </div>
+        <div class="form-group col-12 col-md-4 col-lg-3">
+            <strong class="text-secondary">Date To</strong>
+            <input type="date" id="date_to" class="form-control @error('date_to') is-invalid @enderror" value="{{ isset($date_to) ? $date_to : old('date_to') }}" />
+            @error('date_to') <div class="invalid-feedback">{{ $message }} </div> @enderror
+        </div>
+        <div class="col-12 col-md-4 col-lg-6"><br />
+            <div class="row">
+                <form action="{{ route('posted.filter') }}" method="get"class="w-auto">
+                    <input type="hidden" name="date_from" value="{{ isset($date_from) ? $date_from : old('date_from') }}" />
+                    <input type="hidden" name="date_to" value="{{ isset($date_to) ? $date_to : old('date_to') }}" />
+                    <button type="submit" class="btn btn-success loading">Filter</button>
+                </form>
+                <form action="{{ route('posted.extract') }}" method="get" class="w-auto ml-3">
+                    <input type="hidden" name="date_from" value="{{ isset($date_from) ? $date_from : old('date_from') }}" />
+                    <input type="hidden" name="date_to" value="{{ isset($date_to) ? $date_to : old('date_to') }}" />
+                    <button type="submit" class="btn btn-success loading">Extract</button>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
 @endsection
 @section('content')
+    @include('includes.download')
     <div class="card">
         <div class="table-responsive">
             <table class="table table-sm align-items-center table-flush table-hover">
@@ -81,4 +90,19 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('more-scripts')
+<script>
+    $(document).ready(function() {
+        $('#date_from').change(function() {
+            df = $(this).val();
+            $('input[name="date_from"').val(df);
+        });
+        $('#date_to').change(function() {
+            df = $(this).val();
+            $('input[name="date_to"').val(df);
+        });
+    });
+</script>
 @endsection

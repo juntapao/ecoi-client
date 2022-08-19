@@ -47,39 +47,84 @@
             <td width = "5%"></td>
             <td width = "30%" align="left">Confirmation of Insurance Number</td>
             <td width = "10%">:</td>
-            <td width = "50%">A<strong>{{$transaction->coi_number}}</strong></td>
+            <td width = "50%">A<strong>{{ $transaction->coi_number }}</strong></td>
         </tr>
         <tr class="font10">
             <td width = "5%"></td>
             <td width = "30%" align="left">Principal Insured</td>
             <td width = "10%">:</td>
-            <td width = "50%">{{$transaction->insured_name}}</td>
+            <td width = "50%">{{ $transaction->insured_name }}</td>
         </tr>
-        <tr class="font10">
-            <td width = "5%"></td>
-            <td width = "30%" align="left">Additional Insured</td>
-            <td width = "10%">:</td>
-            <td width = "25%">1.&nbsp;{{$transaction->child_siblings}}</td>
-        </tr>
-        <tr class="font10">
-            <td width = "5%"></td>
-            <td width = "30%"></td>
-            <td width = "10%"></td>
-            <td width = "25%">2.&nbsp;{{$transaction->child_siblings2}}</td>
-        </tr>
-        <tr class="font10">
-            <td width = "5%"></td>
-            <td width = "30%"></td>
-            <td width = "10%"></td>
-            <td width = "25%">3.&nbsp;{{$transaction->child_siblings3}}</td>
-        </tr>
-        <tr class="font10">
-            <td width = "5%"></td>
-            <td width = "30%"></td>
-            <td width = "10%"></td>
-            <td width = "25%">4.&nbsp; {{$transaction->child_siblings4}}</td>
-        </tr>
-        <tr><td></td></tr>
+
+        @php
+            $counter = 1;
+        @endphp
+
+        @if($transaction->guardian)
+            <tr class="font10">
+                <td width = "5%"></td>
+                <td width = "30%" align="left">Additional Insured</td>
+                <td width = "10%">:</td>
+                {{-- <td width = "55%">{{ $counter++ }}. {{ $transaction->guardian }} @if($transaction->guardian) , @if($transaction->civil_status == 'Single') PARENT @else SPOUSE @endif @endif</td> --}}
+                <td width = "55%">{{ $counter++ }}. {{ $transaction->guardian }}{{ $transaction->dependents->where('field', '1_1')->first() ? ', ('.$transaction->dependents->where('field', '1_1')->first()->relationship.')' : '' }}</td>
+            </tr>
+        @endif  
+
+        @if($transaction->guardian2)
+            <tr class="font10">
+                <td width = "5%"></td>
+                <td width = "30%"></td>
+                <td width = "10%"></td>
+                {{-- <td width = "55%">{{ $counter++ }}. {{ $transaction->guardian2 }} , @if($transaction->civil_status == 'Single') PARENT @else SPOUSE @endif</td> --}}
+                <td width = "55%">{{ $counter++ }}. {{ $transaction->guardian2 }}{{ $transaction->dependents->where('field', '1_2')->first() ? ', ('.$transaction->dependents->where('field', '1_2')->first()->relationship.')' : '' }}</td>
+            </tr>
+        @endif
+
+        @if($transaction->child_siblings)
+            <tr class="font10">
+                <td width = "5%"></td>
+                <td width = "30%"></td>
+                <td width = "10%"></td>
+                {{-- <td width = "55%">{{ $counter++ }}. {{ $transaction->child_siblings }} , @if($transaction->civil_status == 'Single') SIBLING @else CHILDREN @endif</td> --}}
+                <td width = "55%">{{ $counter++ }}. {{ $transaction->child_siblings }}{{ $transaction->dependents->where('field', '2_1')->first() ? ', ('.$transaction->dependents->where('field', '2_1')->first()->relationship.')' : '' }}</td>
+            </tr>
+        @endif
+
+        @if($transaction->child_siblings2)
+            <tr class="font10">
+                <td width = "5%"></td>
+                <td width = "30%"></td>
+                <td width = "10%"></td>
+                {{-- <td width = "55%">{{ $counter++ }}. {{ $transaction->child_siblings2 }} , @if($transaction->civil_status == 'Single') SIBLING @else CHILDREN @endif</td> --}}
+                <td width = "55%">{{ $counter++ }}. {{ $transaction->child_siblings2 }}{{ $transaction->dependents->where('field', '2_2')->first() ? ', ('.$transaction->dependents->where('field', '2_2')->first()->relationship.')' : '' }}</td>
+            </tr>
+        @endif
+
+        @if($transaction->child_siblings3)
+            <tr class="font10">
+                <td width = "5%"></td>
+                <td width = "30%"></td>
+                <td width = "10%"></td>
+                {{-- <td width = "55%">{{ $counter++ }}. {{ $transaction->child_siblings3 }} , @if($transaction->civil_status == 'Single') SIBLING @else CHILDREN @endif</td> --}}
+                <td width = "55%">{{ $counter++ }}. {{ $transaction->child_siblings3 }}{{ $transaction->dependents->where('field', '2_3')->first() ? ', ('.$transaction->dependents->where('field', '2_3')->first()->relationship.')' : '' }}</td>
+            </tr>
+        @endif
+
+        @if($transaction->child_siblings4)
+            <tr class="font10">
+                <td width = "5%"></td>
+                <td width = "30%"></td>
+                <td width = "10%"></td>
+                {{-- <td width = "55%">{{ $counter++ }}. {{ $transaction->child_siblings4 }} , @if($transaction->civil_status == 'Single') SIBLING @else CHILDREN @endif</td> --}}
+                <td width = "55%">{{ $counter++ }}. {{ $transaction->child_siblings4 }}{{ $transaction->dependents->where('field', '2_4')->first() ? ', ('.$transaction->dependents->where('field', '2_4')->first()->relationship.')' : '' }}</td>
+            </tr>
+        @endif
+
+        {{-- FOR THE SIGNATURE TO NOT BE OUT OF PLACE --}}
+        @for($i = 0; $i < (7 - $counter); $i++)  
+            <tr><td></td></tr>
+        @endfor
+
         <tr class="font10">
             <td width = "5%"></td>
             <td width = "30%" align="left">Group Policy Holder</td>
@@ -90,7 +135,7 @@
             <td width = "5%"></td>
             <td width = "30%" align="left">Group Policy Number</td>
             <td width = "10%">:</td>
-            <td width = "50%">{{$transaction->policy_number}}</td>
+            <td width = "50%">{{ $transaction->policy_number }}</td>
         </tr>
         <tr class="font10">
             <td width = "5%"></td>
@@ -98,7 +143,7 @@
             <td width = "10%">:</td>
             <td width = "50%">Maximum of <strong>five (5)</strong> Confirmation of Insurance per person</td>
         </tr>
-        <tr><td></td></tr>
+        {{-- <tr><td></td></tr> --}}
         <tr class="font10 bord">
             <th width = "5%" style="border:none;"></th>
             <th width = "40%"></th>
@@ -151,24 +196,24 @@
             <td width = "5%" style="border:none;"></td>
             <td width = "40%" align="left">Fire Assistance</td>
             <td width = "17%">PHP {{ number_format($holder['fire_principal'], 2) }}</td>
-            <td width = "17%">PHP {{ number_format($holder['fire_spouse_parents'], 2) }}</td>
-            <td width = "16%">PHP {{ number_format($holder['fire_child_siblings'], 2) }}</td>
-            {{-- <td width = "17%"> --- </td>
-            <td width = "16%"> --- </td> --}}
+            {{-- <td width = "17%">PHP {{ number_format($holder['fire_spouse_parents'], 2) }}</td>
+            <td width = "16%">PHP {{ number_format($holder['fire_child_siblings'], 2) }}</td> --}}
+            <td width = "17%">N/A</td>
+            <td width = "16%">N/A</td>
             <td width = "5%" style="border:none;"></td>
         </tr>
         <tr><td></td></tr>
         <tr class="font10"> 
             <td width = "5%"></td>
             <td width = "30%">Period of Insurance</td>
-            <td width = "20%">:</td>
-            <td width = "20%"></td>
+            <td width = "10%">:</td>
+            <td width = "55%">{{ $transaction->date_issued->format('F d, Y') }} to {{ $transaction->date_issued->addYear()->format('F d, Y') }}</td>
         </tr>    
         <tr class="font10">
             <td width = "5%"></td>
             <td width = "30%">Total Premium</td>
             <td width = "10%">:</td>
-            <td width = "20%">PHP {{ number_format(($transaction->price * intval($transaction->units)), 2)}}</td>
+            <td width = "55%">PHP {{ number_format(($transaction->price * intval($transaction->units)), 2)}}</td>
         </tr>
         <tr><td></td></tr>
         <tr class="font8">
@@ -223,6 +268,13 @@
         </tr>
         <tr>
             <td width="5%"></td>
+            <td width="90%" align="justify"><p style="font-size:8px;">If within 180 days from the date of the accident, such injuries shall result in loss of life or any of the following loss, the Company will pay based on the schedule of indemnity. This schedule of indemnity is available upon request.<br />With respect to Coverage A & B, the aggregate benefits payable in respect of any one accident resulting in losses within 180 days from the date of accident shall not exceed the Principal Sum. However, any partial benefit already paid for any losses shall not be carried over in the subsequent policy years.</p>
+                <p style="font-size:8px;">In any policy year, the aggregate benefits payable under Coverage B in respect of one or more accidents resulting in losses within 180 days from the date of accident shall not exceed the Principal Sum. For subsequent accident resulting in losses which would make the aggregate benefits exceed the Principal Sum, the amount payable under Coverage B shall be the Principal Sum less the amounts paid for previous losses. However, the payment of the Principal Sum for such losses under Coverage B shall not terminate Coverage A. The aggregate benefits payable under Coverage A & B in respect of an independent and unrelated accident if death arises within 180 days from such accident shall always be the Principal Sum.</p>
+            </td>
+            <td width="5%"></td>
+        </tr>
+        {{-- <tr>
+            <td width="5%"></td>
             <td width="90%"><p style="font-size:8px;">When injury results in any of the following losses within one hundred eighty (180) days after the date of the accident, the Company will pay for the loss of:</p></td>
             <td width="5%"></td>
         </tr>
@@ -264,7 +316,7 @@
             <td width="5%"></td>
             <td width="90%" style="text-align: justify;">The occurrence of any specific loss for which the corresponding indemnity provided above is payable to the Named Insured at no less than 100% of the Principal Sum Insured, shall at once terminate all insurance under the policy with respect to said Named Insured, but such termination shall be without prejudice to any claim originating out of the accident causing such loss.</td>
             <td width="5%"></td>
-        </tr>
+        </tr> --}}
         <tr>
             <td width="100%"></td>
         </tr>

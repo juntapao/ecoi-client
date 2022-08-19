@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('search', route('coi_d.search'))
-@section('delete', route('coi_d.destroy', $transaction->id))
+@section('delete', route('coi_d.destroy', Crypt::encrypt($transaction->id)))
 @section('header')
     <div class="row align-items-center py-4">
         <div class="col-7 col-lg-6">
@@ -17,7 +17,7 @@
         <div class="col-5 col-lg-6 text-right">
             <a href="{{ route('coi_d.create') }}" class="btn btn-sm btn-neutral loading">Add</a>
             @if($transaction->posted == null)
-                <a href="{{ route('coi_d.edit', $transaction->id) }}" class="btn btn-sm btn-neutral loading">Edit</a>
+                <a href="{{ route('coi_d.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-neutral loading">Edit</a>
                 <button data-toggle="modal" data-target="#delete" class="btn btn-sm btn-neutral">Delete</button>
             @endif
             <a href="{{ route('coi_d.index') }}" class="btn btn-sm btn-neutral loading">Show All</a>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label>Date of Birth</label>
-                    <input type="date" class="form-control" value="{{ $transaction->dateofbirth }}" readonly />
+                    <input type="date" class="form-control" value="{{ $transaction->dateofbirth->format('Y-m-d') }}" readonly />
                 </div>
             </div>
             <div class="row">
@@ -79,10 +79,10 @@
             </div>
         </div>
         <div class="text-right">
-            @if($transaction->posted)
-                <a href="{{ route('coi_d.print', $transaction->id) }}" class="btn btn-success">Print</a>
+            @if($transaction->posted == null)
+                <a href="{{ route('coi_d.post', Crypt::encrypt($transaction->id)) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
             @else
-                <a href="{{ route('coi_d.post', $transaction->id) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
+                <a href="{{ route('coi_d.print', Crypt::encrypt($transaction->id)) }}" class="btn btn-success">Print</a>
             @endif
         </div>
     </div>
