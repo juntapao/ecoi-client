@@ -16,7 +16,7 @@
         </div>
         <div class="col-5 col-lg-6 text-right">
             <a href="{{ route('coi_b.create') }}" class="btn btn-sm btn-neutral loading">Add</a>
-            @if($transaction->posted == null)
+            @if(!$transaction->posted)
                 <a href="{{ route('coi_b.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-neutral loading">Edit</a>
                 <button data-toggle="modal" data-target="#delete" class="btn btn-sm btn-neutral">Delete</button>
             @endif
@@ -85,7 +85,7 @@
             </div>
         </div>
         <div class="text-right">
-            @if($transaction->posted == null)
+            @if(!$transaction->posted)
                 <a href="{{ route('coi_b.post', Crypt::encrypt($transaction->id)) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
             @else
                 <a href="{{ route('coi_b.print', Crypt::encrypt($transaction->id)) }}" class="btn btn-success">Print</a>

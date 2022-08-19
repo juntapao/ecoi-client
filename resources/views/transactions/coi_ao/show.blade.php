@@ -16,7 +16,7 @@
         </div>
         <div class="col-5 col-lg-6 text-right">
             <a href="{{ route('coi_ao.create') }}" class="btn btn-sm btn-neutral loading">Add</a>
-            @if($transaction->posted == null)
+            @if(!$transaction->posted)
                 <a href="{{ route('coi_ao.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-neutral loading">Edit</a>
                 <button data-toggle="modal" data-target="#delete" class="btn btn-sm btn-neutral">Delete</button>
             @endif
@@ -70,7 +70,7 @@
         </div>
         <div class="text-right">
             {{-- <a href="{{ route('coi_ao.index') }}" class="btn btn-primary">Cancel</a> --}}
-            @if($transaction->posted == null)
+            @if(!$transaction->posted)
                 <a href="{{ route('coi_ao.post', Crypt::encrypt($transaction->id)) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Post this transaction?')">Post</a>
             @else
                 <a href="{{ route('coi_ao.print', Crypt::encrypt($transaction->id)) }}" class="btn btn-success">Print</a>

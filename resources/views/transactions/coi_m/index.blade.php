@@ -44,7 +44,7 @@
                                 <td>{{ $transaction->beneficiary }}</td>
                                 <td>{{ $transaction->relationship }}</td>
                                 <td class="text-center">
-                                    @if($transaction->posted == NULL)
+                                    @if(!$transaction->posted)
                                         <a href="{{ route('coi_m.edit', Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-warning loading" >Edit</a>  
                                         <a href="{{ route('coi_m.post', Crypt::encrypt($transaction->id)) }}" onclick="return confirm('Are you sure you want to Post this transaction?')" class="btn btn-sm btn-primary" >Post</a>
                                     @else
