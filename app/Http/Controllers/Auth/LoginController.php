@@ -13,6 +13,7 @@ use App\User;
 use App\Menu;
 use App\UserRole;
 use App\Setting;
+use App\Insuran_price;
 use DB;
 use Auth;
 
@@ -60,6 +61,11 @@ class LoginController extends Controller
             $userRoleAccess = UserRole::find($roleId)->access;
             $terminalSignature = Setting::where('name', 'terminal_signature')->first()->value;
             $terminalId = Setting::where('name', 'terminal_id')->first()->value;
+            $systemSettings = Setting::whereIn('name', ['family_protect_plus', 'kp_protect', 'family_protect', 'pawners_protect', 'pinoy_protect_plus', 'mediphone'])
+                ->select(['name', 'value'])
+                ->get()->toArray();
+            $insurancePrices = Insuran_price::select(['id', 'coi_type', 'price'])
+                ->get()->toArray();
 
             $userRole = explode(',', $userRoleAccess);
 
@@ -85,7 +91,12 @@ class LoginController extends Controller
                 'branchName' => $branchName,
                 'terminalId' => $terminalId,
                 'terminalSignature' => $terminalSignature,
+                'systemSettings' => $systemSettings,
+                'insurancePrices' => $insurancePrices,
             ]);
+
+            // dd($parentmenu);
+
             return redirect()->route('dashboard');
         } else {
             session(['error' => 'Invalid Username or Password']);
