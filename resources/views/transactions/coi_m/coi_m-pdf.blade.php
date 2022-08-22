@@ -57,7 +57,7 @@
             <td  width="45%" align="right" style="font-size:10px">
                 <br><br>
                 {{-- <strong>MAA GENERAL ASSURANCE PHILS., INC.</strong> --}}
-                <b>Certificate of Cover Number: <u>{{ $transaction->coi_number }}</u></b>
+                <b>Certificate of Cover Number: <u>{{ $transaction->terminal_coi_number }}</u></b>
             </td>
         </tr>
         <tr><td></td></tr>

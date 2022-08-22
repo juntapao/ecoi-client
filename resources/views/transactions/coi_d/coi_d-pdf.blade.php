@@ -46,7 +46,7 @@
             <td width = "5%"></td>
             <td width = "30%" align="left">Confirmation of Insurance Number</td>
             <td width = "10%">:</td>
-            <td width = "50%">D<strong>{{$transaction->coi_number}}</strong></td>
+            <td width = "50%">D<strong>{{ $transaction->terminal_coi_number }}</strong></td>
         </tr>
         <tr class="font10">
             <td width = "5%"></td>
