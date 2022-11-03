@@ -131,7 +131,7 @@ class PostedController extends Controller
         
         if($with_transaction) {
             $writer = new Xlsx($spreadsheet);
-            $result = $writer->save(public_path('storage/downloads/').$file_name);
+            $result = $writer->save(public_path('storage/').$file_name);
             session([
                 'download' => $file_name,
                 'success' => 'File Created Successfully'
