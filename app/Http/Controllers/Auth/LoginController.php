@@ -115,6 +115,7 @@ class LoginController extends Controller
                 ->first();
 
             if($current_version) {
+                self::update_user();
                 return view('auth.login')
                     ->with(compact('terminal_info'));
             } else {
@@ -209,5 +210,27 @@ class LoginController extends Controller
         ])
     ]);
         return view('initial-setup');
+    }
+
+    public static function update_user()
+    {
+        $terminal_signature = CommonController::getTerminalSignature();
+        $update_date = User::orderBy('updated_at', 'desc')->first()->updated_at->format('Y-m-d');
+        $all_ids = User::where('updated_at', '<', $update_date)->pluck('id')->toArray();
+
+        $body = [
+            'type' => 'update_users',
+            'terminal_signature' => $terminal_signature,
+            'update_date' => $update_date,
+            'ids' => $all_ids,
+        ];
+
+        $server_data = CommonController::curl(config('app.ecoi_server_url').'/api/sync', 'json', $body);
+
+        if(!empty($server_data->data)) {
+            foreach($server_data->data as $data) {
+                User::updateOrCreate(['id' => $data->id], (array)$data);
+            }
+        }
     }
 }
