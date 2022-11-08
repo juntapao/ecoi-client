@@ -216,7 +216,7 @@ class LoginController extends Controller
     {
         $terminal_signature = CommonController::getTerminalSignature();
         $update_date = User::orderBy('updated_at', 'desc')->first()->updated_at->format('Y-m-d');
-        $all_ids = User::where('updated_at', '<', $update_date)->pluck('id')->toArray();
+        $all_ids = User::all()->pluck('id')->toArray();
 
         $body = [
             'type' => 'update_users',
