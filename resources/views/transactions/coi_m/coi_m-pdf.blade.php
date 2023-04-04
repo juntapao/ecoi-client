@@ -63,7 +63,7 @@
         <tr><td></td></tr>
         <tr class="font-9">
             <td width = "100%" align="center">
-                <b><u>ML's TeleMedicine</u></b>
+                <b><u>ML TELEMEDICINE</u></b>
             </td>
         </tr>
         <tr><td></td></tr>
@@ -73,27 +73,27 @@
                     <td width = "24%" align="left">Name of Member</td>
                     <td width = "26%" class="border-bottom" nowrap>{{ $transaction->insured_name }}</td>
                     <td width = "24%" align="left">&nbsp;&nbsp;Policy Holder's Name</td>
-                    <td width = "26%" class="border-bottom">ML Telemedicine Program</td>
+                    <td width = "26%" class="border-bottom"><b>ML Telemedicine Program</b></td>
                 </tr>
                 <tr>
                     <td align="left">Contact No. / Telephone No.</td>
                     <td class="border-bottom" nowrap>{{ $transaction->contact_number }}</td>
                     <td align="left">&nbsp;&nbsp;Group Policy No.</td>
-                    <td class="border-bottom">{{ $transaction->policy_number }}</td>
+                    <td class="border-bottom"><b>{{ $transaction->policy_number }}</b></td>
                 </tr>
                 <tr>
                     <td align="left">E-Mail Address</td>
                     <td class="border-bottom" nowrap>{{ $transaction->email }}</td>
                     <td width = "18%" align="left">&nbsp;&nbsp;Period of Cover</td>
                     <td width = "6%" align="right">From</td>
-                    <td width = "26%" class="border-bottom">{{ $transaction->date_issued->format('m/d/Y') }}</td>
+                    <td width = "26%" class="border-bottom"><b>{{ $transaction->date_issued->format('m/d/Y') }}</b></td>
                 </tr>
                 <tr>
                     <td align="left">Beneficiary's Name</td>
                     <td class="border-bottom" nowrap>{{ $transaction->beneficiary }}</td>
                     <td width = "18%" align="left"></td>
                     <td width = "6%" align="right">To</td>
-                    <td width = "26%" class="border-bottom">{{ $transaction->date_issued->addYear()->format('m/d/Y') }}</td>
+                    <td width = "26%" class="border-bottom"><b>{{ $transaction->date_issued->addYear()->format('m/d/Y') }}</b></td>
                 </tr>
                 <tr>
                     <td align="left">Relationship to the Member</td>
@@ -157,7 +157,7 @@
         <tr><td></td></tr>
         <tr>
             <td width="2%"></td>
-            <td width="98%" colspan="3" style="text-align: justify;"><span class="font-9">This certifies that the named member in this certificate is covered under the <b>Master Policy issued by MAA General Assurance Company, Inc.</b>  subject to the terms and conditions, warranties and clauses, including exceptions of the policy and all claims will be adjusted in accordance therewith.  This serves as evidence and receipt of your premium payment.</span></td>
+            <td width="98%" colspan="3" style="text-align: justify;"><span class="font-9">This certifies that the named member in this certificate is covered under the <b>Master Policy issued by MAA General Assurance Philippines, Inc.</b>  subject to the terms and conditions, warranties and clauses, including exceptions of the policy and all claims will be adjusted in accordance therewith.  This serves as evidence and receipt of your premium payment.</span></td>
             <td width="2%"></td>
         </tr>
         <tr><td></td></tr>

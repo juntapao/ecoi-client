@@ -81,7 +81,7 @@ class CoiMController extends Controller
 
         } catch(\Exception $exception) {
 
-            session(['error', $exception->getMessage()]);
+            session(['error' => $exception->getMessage()]);
             return redirect()->route('coi_m.create')->withInput();
 
         }
@@ -99,7 +99,7 @@ class CoiMController extends Controller
 
         } catch(\Exception $exception) {
 
-            session(['error', $exception->getMessage()]);
+            session(['error' => $exception->getMessage()]);
             return redirect()->route('coi_m.index');
 
         }
@@ -115,7 +115,7 @@ class CoiMController extends Controller
         
         } catch(\Exception $exception) {
 
-            session(['error', $exception->getMessage()]);
+            session(['error' => $exception->getMessage()]);
             return redirect()->route('coi_m.index');
 
         }
@@ -154,7 +154,7 @@ class CoiMController extends Controller
 
         } catch(\Exception $exception) {
 
-            session(['error', $exception->getMessage()]);
+            session(['error' => $exception->getMessage()]);
             return redirect()->back()->withInput();
 
         }
@@ -177,7 +177,7 @@ class CoiMController extends Controller
 
         } catch(\Exception $exception) {
 
-            session(['error', $exception->getMessage()]);
+            session(['error' => $exception->getMessage()]);
             return redirect()->back()->withInput();
 
         }
@@ -222,7 +222,7 @@ class CoiMController extends Controller
 
         } catch(\Exception $exception) {
 
-            session(['error', $exception->getMessage()]);
+            session(['error' => $exception->getMessage()]);
             return redirect()->back()->withInput();
 
         }
@@ -289,7 +289,7 @@ class CoiMController extends Controller
 
         } catch(\Exception $exception) {
 
-            session(['error', $exception->getMessage()]);
+            session(['error' => $exception->getMessage()]);
             return redirect()->back();
 
         }

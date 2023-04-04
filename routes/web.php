@@ -66,6 +66,13 @@ Route::middleware(['auth', 'check-network', 'sync-transactions'])->group(functio
                 Route::get('post/{coi_r}', 'CoiRController@post')->name('coi_r.post');
             });
             Route::resource('coi_r', 'CoiRController');
+            // COI M
+            Route::prefix('coi_m')->group(function() {
+                Route::get('search', 'CoiMController@search')->name('coi_m.search');
+                Route::get('print/{coi_m}', 'CoiMController@print')->name('coi_m.print');
+                Route::get('post/{coi_m}', 'CoiMController@post')->name('coi_m.post');
+            });
+            Route::resource('coi_m', 'CoiMController');
         });
         Route::prefix('reports')->group(function() {
             // POSTED TRANSACTIONS
