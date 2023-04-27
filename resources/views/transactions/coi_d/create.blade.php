@@ -55,7 +55,7 @@
                         @error('insured_name') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="dateofbirth">Date of Birth</label>
+                        <label for="dateofbirth">Date of Birth <small>(7-70 years old)</label>
                         <input type="date" id="dateofbirth" name="dateofbirth" class="form-control @error('dateofbirth') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('dateofbirth') }}" />
                         @error('dateofbirth') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>

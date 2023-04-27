@@ -11,6 +11,7 @@ use App\Branch;
 use App\PolicySeries;
 use App\Insuran_price;
 use App\Setting;
+use App\Rules\AgeRestriction1;
 use DB;
 use PDF;
 
@@ -45,7 +46,7 @@ class CoiBController extends Controller
         $this->validate($request, [
             'insured_name' => 'required',
             'address' => 'required',
-            'dateofbirth' => 'required',
+            'dateofbirth' => ['required', new AgeRestriction1],
             'relationship' => 'required',
             'beneficiary' => 'required',
             'units' => 'required|numeric|between:1,5',
@@ -125,7 +126,7 @@ class CoiBController extends Controller
         $this->validate($request, [
             'insured_name' => 'required',
             'address' => 'required',
-            'dateofbirth' => 'required',
+            'dateofbirth' => ['required', new AgeRestriction1],
             'relationship' => 'required',
             'beneficiary' => 'required',
             'units' => 'required|numeric|between:1,5',
