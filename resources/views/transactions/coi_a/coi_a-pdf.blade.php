@@ -233,14 +233,14 @@
             <td width="5%"></td>
             <td width="40%" align="center">Signature of Insured</td>
             <td width="5%"></td>
-            <td width="40%" align="center" style="text-decoration: overline;"><strong>DANIEL C. GO</strong></td>
+            <td width="40%" align="center" style="text-decoration: overline;"><strong>MARTIN L. DELA ROSA</strong></td>
             <td width="10%"></td>
         </tr>
         <tr class="font8">
             <td width="5%"></td>
             <td width="40%" align="center">Date of Issuance: {{ $transaction->date_issued ? Carbon\Carbon::parse($transaction->date_issued)->format('M d, Y') : null }} </td>
             <td width="5%"></td>
-            <td width="40%" align="center">President & CEO</td>
+            <td width="40%" align="center">Deputy CEO / Executive Vice President</td>
             <td width="10%"></td>
         </tr>
         <tr>
