@@ -13,6 +13,8 @@ use App\Setting;
 use App\Rules\AgeRestriction1;
 use DB;
 use PDF;
+use App\Relationship;
+use App\Rules\AlphabetStringOnly;
 
 class CoiMController extends Controller
 {
@@ -20,7 +22,7 @@ class CoiMController extends Controller
     {
         $branch_name = session('branchName') ?? auth()->user()->branch->branch_name;
         
-        $transactions = DB::table('transaction as t')
+        $transactions = DB::table('transactions as t')
             ->leftJoin('users as u', 't.userid_created', '=', 'u.id')
             ->leftJoin('branches as b', 'b.id', '=', 'u.branch_id')
             ->select(['t.status', 't.coi_number', 't.insured_name', 't.posted', 't.id', 't.beneficiary', 't.relationship'])
@@ -36,17 +38,18 @@ class CoiMController extends Controller
     public function create()
     {
         $branch = Branch::find(auth()->user()->branch_id);
+        $relationships = Relationship::where('status', true)->get();
         $datenow = date('Y-m-d');
-        return view('transactions.coi_m.create', compact('branch', 'datenow'));
+        return view('transactions.coi_m.create', compact('branch', 'datenow', 'relationships'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'insured_name' => 'required',
-            'contact_number' => 'required',
-            'email' => 'required',
-            'beneficiary' => 'required',
+            'insured_name' => ['required', new AlphabetStringOnly],
+            'contact_number' => 'required|digits:11',
+            'email' => 'required|email:rfc,dns',
+            'beneficiary' => ['required', new AlphabetStringOnly],
             'relationship' => 'required',
             'units' => 'required|numeric|between:1,1',
             // 'dateofbirth' => ['required', new AgeRestriction1],
@@ -62,6 +65,7 @@ class CoiMController extends Controller
 
             $transaction = new Transaction;
             $transaction->date_issued = Carbon::now()->format('Y-m-d');
+            $transaction->terminal_coi_number = CommonController::getCoiNumber();
             $transaction->insured_name = strtoupper($request->insured_name);
             $transaction->dateofbirth = $request->dateofbirth;
             $transaction->policy_number = $transaction_policy_number;
@@ -96,6 +100,7 @@ class CoiMController extends Controller
 
             // $branch = Branch::find(auth()->user()->branch_id);
             $transaction = Transaction::find(Crypt::decrypt($id));
+            $relationships = Relationship::where('status', true)->get();
 
         } catch(\Exception $exception) {
 
@@ -104,7 +109,7 @@ class CoiMController extends Controller
 
         }
 
-        return view('transactions.coi_m.show', compact('id', 'transaction'));
+        return view('transactions.coi_m.show', compact('id', 'transaction', 'relationships'));
     }
 
     public function edit($id)
@@ -112,6 +117,7 @@ class CoiMController extends Controller
         try {
 
             $transaction = Transaction::find(Crypt::decrypt($id));
+            $relationships = Relationship::where('status', true)->get();
         
         } catch(\Exception $exception) {
 
@@ -120,16 +126,16 @@ class CoiMController extends Controller
 
         }
 
-        return view('transactions.coi_m.edit')->with('transaction', $transaction);
+        return view('transactions.coi_m.edit' ,compact('transaction', 'relationships'));
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'insured_name' => 'required',
-            'contact_number' => 'required',
-            'email' => 'required',
-            'beneficiary' => 'required',
+            'insured_name' => ['required', new AlphabetStringOnly],
+            'contact_number' => 'required|digits:11',
+            'email' => 'required|email:rfc,dns',
+            'beneficiary' => ['required', new AlphabetStringOnly],
             'relationship' => 'required',
             'units' => 'required|numeric|between:1,1',
             'dateofbirth' => ['required', new AgeRestriction1],
@@ -193,12 +199,12 @@ class CoiMController extends Controller
         $transactions = DB::table('transaction as t')
             ->leftJoin('users as u', 't.userid_created', '=', 'u.id')
             ->leftJoin('branches as b', 'b.id', '=', 'u.branch_id')
-            ->select(['t.status', 't.coi_number', 't.insured_name', 't.posted', 't.id', 't.beneficiary', 't.relationship'])
+            ->select(['t.status', 't.terminal_coi_number', 't.insured_name', 't.posted', 't.id', 't.beneficiary', 't.relationship'])
             ->where('t.type', 'M')
             ->where('t.status', '!=', 'deleted')
             ->where('b.branch_name', $branch_name)
             ->where(function($query) use ($request) {
-                $query->where('t.coi_number', 'like', '%'.$request->search.'%')
+                $query->where('t.terminal_coi_number', 'like', '%'.$request->search.'%')
                     ->orWhere('t.beneficiary', 'like', '%'.$request->search.'%')
                     ->orWhere('t.relationship', 'like', '%'.$request->search.'%')
                     ->orWhere('t.insured_name', 'like', '%'.$request->search.'%');

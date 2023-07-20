@@ -18,6 +18,7 @@ use App\Rules\AgeRestriction1;
 use App\Rules\AgeRestriction2;
 use DB;
 use PDF;
+use App\Rules\AlphabetStringOnly;
 
 class CoiAController extends Controller
 {
@@ -49,14 +50,14 @@ class CoiAController extends Controller
     {
         $this->validate($request, [
             'units' => 'required|numeric|between:1,5',
-            'insured_name' => 'required',
+            'insured_name' => ['required', new AlphabetStringOnly],
             'dateofbirth' => ['required', new AgeRestriction1],
-            'guardian' => 'required_with:guardian_dateofbirth|required_with:relationship_1_1',
-            'guardian2' => 'required_with:guardian_dateofbirth2|required_with:relationship_1_2',
-            'child_siblings' => 'required_with:child_siblings_dateofbirth|required_with:relationship_2_1',
-            'child_siblings2' => 'required_with:child_siblings_dateofbirth2|required_with:relationship_2_2',
-            'child_siblings3' => 'required_with:child_siblings_dateofbirth3|required_with:relationship_2_3',
-            'child_siblings4' => 'required_with:child_siblings_dateofbirth4|required_with:relationship_2_4',
+            'guardian' => ['required_with:guardian_dateofbirth|required_with:relationship_1_1', new AlphabetStringOnly],
+            'guardian2' => ['required_with:guardian_dateofbirth2|required_with:relationship_1_2', new AlphabetStringOnly],
+            'child_siblings' => ['required_with:child_siblings_dateofbirth|required_with:relationship_2_1', new AlphabetStringOnly],
+            'child_siblings2' => ['required_with:child_siblings_dateofbirth2|required_with:relationship_2_2', new AlphabetStringOnly],
+            'child_siblings3' => ['required_with:child_siblings_dateofbirth3|required_with:relationship_2_3', new AlphabetStringOnly],
+            'child_siblings4' => ['required_with:child_siblings_dateofbirth4|required_with:relationship_2_4', new AlphabetStringOnly],
             'guardian_dateofbirth' => ['required_with:guardian', new AgeRestriction1],
             'guardian_dateofbirth2' => ['required_with:guardian2', new AgeRestriction1],
             'child_siblings_dateofbirth' =>  ['required_with:child_siblings', new AgeRestriction2],
@@ -166,19 +167,19 @@ class CoiAController extends Controller
         $this->validate($request, [
             // 'bos_number' => 'required',
             'units' => 'required|numeric|between:1,5',
-            'insured_name' => 'required',
+            'insured_name' => ['required', new AlphabetStringOnly],
             'dateofbirth' => ['required', new AgeRestriction1],
-            'guardian' => 'required_with:guardian_dateofbirth',
+            'guardian' => ['required_with:guardian_dateofbirth', new AlphabetStringOnly],
             'guardian_dateofbirth' => ['required_with:guardian', new AgeRestriction1],
-            'guardian2' => 'required_with:guardian_dateofbirth2',
+            'guardian2' => ['required_with:guardian_dateofbirth2', new AlphabetStringOnly],
             'guardian_dateofbirth2' => ['required_with:guardian2', new AgeRestriction1],
-            'child_siblings' => 'required_with:child_siblings_dateofbirth',
+            'child_siblings' => ['required_with:child_siblings_dateofbirth', new AlphabetStringOnly],
             'child_siblings_dateofbirth' =>  ['required_with:child_siblings', new AgeRestriction2],
-            'child_siblings2' => 'required_with:child_siblings_dateofbirth2',
+            'child_siblings2' => ['required_with:child_siblings_dateofbirth2', new AlphabetStringOnly],
             'child_siblings_dateofbirth2' => ['required_with:child_siblings2', new AgeRestriction2],
-            'child_siblings3' => 'required_with:child_siblings_dateofbirth3',
+            'child_siblings3' => ['required_with:child_siblings_dateofbirth3', new AlphabetStringOnly],
             'child_siblings_dateofbirth3' => ['required_with:child_siblings3', new AgeRestriction2],
-            'child_siblings4' => 'required_with:child_siblings_dateofbirth4',
+            'child_siblings4' => ['required_with:child_siblings_dateofbirth4', new AlphabetStringOnly],
             'child_siblings_dateofbirth4' => ['required_with:child_siblings4', new AgeRestriction2],
             'reason' => 'required',
             'relationship_1_1' => 'required_with:guardian',
@@ -242,7 +243,7 @@ class CoiAController extends Controller
         return redirect()->route('coi_a.show', Crypt::encrypt($transaction->id));
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $this->validate($request, [
             'reason' => 'required',

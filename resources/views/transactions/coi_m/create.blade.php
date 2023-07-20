@@ -74,7 +74,13 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="relationship">Relationship</label>
-                        <input type="text" id="relationship" name="relationship" class="form-control text-uppercase @error('relationship') is-invalid @enderror" placeholder="Relationship" value="{{ old('relationship') }}" required>
+                        {{-- <input type="text" id="relationship" name="relationship" class="form-control text-uppercase @error('relationship') is-invalid @enderror" placeholder="Relationship" value="{{ old('relationship') }}" required> --}}
+                        <select name="relationship" id="relationship" class="form-control @error('relationship') is-invalid @enderror">
+                            <option value="" selected>- SELECTED -</option>
+                            @foreach ($relationships as $relationship)
+                                <option value="{{$relationship->name}}" @if(old('relationship') == $relationship->name)selected @endif>{{$relationship->name}}</option>
+                            @endforeach
+                        </select>
                         @error('relationship') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>

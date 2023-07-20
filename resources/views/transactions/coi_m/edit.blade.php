@@ -87,7 +87,12 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="relationship">Relationship</label>
-                        <input type="text" id="relationship" name="relationship" class="form-control text-uppercase @error('relationship') is-invalid @enderror" placeholder="Relationship" value="{{ old('relationship', $transaction->relationship) }}" />
+                        {{-- <input type="text" id="relationship" name="relationship" class="form-control text-uppercase @error('relationship') is-invalid @enderror" placeholder="Relationship" value="{{ old('relationship', $transaction->relationship) }}" /> --}}
+                        <select name="relationship" id="relationship" class="form-control @error('relationship') is-invalid @enderror">
+                            @foreach ($relationships as $relationship)
+                                <option value="{{$relationship->name}}" @if($relationship->name == $transaction->relationship) selected @endif>{{$relationship->name}}</option>
+                            @endforeach
+                        </select>
                         @error('relationship') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>

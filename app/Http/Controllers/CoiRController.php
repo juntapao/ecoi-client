@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Rules\AlphabetStringOnly;
 use Illuminate\Support\Facades\Crypt;
 use Carbon\Carbon;
 use App\Transaction;
@@ -44,8 +45,8 @@ class CoiRController extends Controller
     {
         $this->validate($request, [
             'ticket_number' => 'required',
-            'beneficiary' => 'required',
-            'insured_name' => 'required',
+            'beneficiary' => ['required', new AlphabetStringOnly],
+            'insured_name' => ['required', new AlphabetStringOnly],
             'units' => 'required|numeric|between:1,5',
         ]);
         
@@ -120,8 +121,8 @@ class CoiRController extends Controller
     {
         $this->validate($request, [
             'ticket_number' => 'required',
-            'beneficiary' => 'required',
-            'insured_name' => 'required',
+            'beneficiary' => ['required', new AlphabetStringOnly],
+            'insured_name' => ['required', new AlphabetStringOnly],
             'units' => 'required|numeric|between:1,5',
             'reason' => 'required',
         ]);
@@ -149,7 +150,7 @@ class CoiRController extends Controller
         return redirect()->route('coi_r.show', Crypt::encrypt($transaction->id));
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $this->validate($request, [
             'reason' => 'required',

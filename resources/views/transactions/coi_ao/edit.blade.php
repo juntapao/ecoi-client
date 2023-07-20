@@ -52,31 +52,38 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="kpt_number">KPT Number</label>
-                        <input type="text" name="kpt_number" class="form-control text-uppercase @error('kpt_number') is-invalid @enderror" value="{{ $transaction->kpt_number }}" placeholder="KPT Number" required />
+                        <input type="text" name="kpt_number" class="form-control text-uppercase @error('kpt_number') is-invalid @enderror" value="{{ old('kpt_number', $transaction->kpt_number) }}" placeholder="KPT Number" required />
                         @error('kpt_number') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                     <div class="form-group col-md-4">
                         <label for="units">No of units</label>
-                        <input type="number" name="units" value="{{ $transaction->units }}" class="form-control @error('units') is-invalid @enderror" placeholder="Quantity (Maximum of 5)" required />
+                        {{-- <input type="number" name="units" value="{{ $transaction->units }}" class="form-control @error('units') is-invalid @enderror" placeholder="Quantity (Maximum of 5)" required /> --}}
+                        <select name="units" id="units" class="form-control @error('units') is-invalid @enderror">
+                            <option value="1" @if($transaction->units == 1)selected @endif>1</option>
+                            <option value="2" @if($transaction->units == 2)selected @endif>2</option>
+                            <option value="3" @if($transaction->units == 3)selected @endif>3</option>
+                            <option value="4" @if($transaction->units == 4)selected @endif>4</option>
+                            <option value="5" @if($transaction->units == 5)selected @endif>5</option>
+                        </select>
                         @error('units') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div> 
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="insured_name">Insured KP Sender/Receiver</label>
-                        <input type="text" name="insured_name" class="form-control text-uppercase @error('insured_name') is-invalid @enderror" value="{{ $transaction->insured_name }}" placeholder="Insured Name" required />
+                        <input type="text" name="insured_name" class="form-control text-uppercase @error('insured_name') is-invalid @enderror" value="{{ old('insured_name', $transaction->insured_name) }}" placeholder="Insured Name" required />
                         @error('insured_name') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                     <div class="form-group col-md-6">
                         <label for="beneficiary">Beneficiary</label>
-                        <input type="text" name="beneficiary" class="form-control text-uppercase @error('beneficiary') is-invalid @enderror" value="{{ $transaction->beneficiary }}" placeholder="Beneficiary" required />
+                        <input type="text" name="beneficiary" class="form-control text-uppercase @error('beneficiary') is-invalid @enderror" value="{{ old('beneficiary', $transaction->beneficiary) }}" placeholder="Beneficiary" required />
                         @error('beneficiary') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-12">
                         <label for="reason">Reason</label>
-                        <textarea name="reason" class="form-control text-uppercase @error('reason') is-invalid @enderror" placeholder="Reason for Edit" >{{ $transaction->reason }}</textarea>
+                        <textarea name="reason" class="form-control text-uppercase @error('reason') is-invalid @enderror" placeholder="Reason for Edit" >{{ old('reason', $transaction->reason) }}</textarea>
                         @error('reason') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>
