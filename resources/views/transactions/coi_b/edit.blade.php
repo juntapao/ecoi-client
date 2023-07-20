@@ -57,7 +57,14 @@
                     </div> --}}
                     <div class="form-group col-md-4">
                         <label for="units">No of units</label>
-                        <input type="number" name="units" class="form-control @error('units') is-invalid @enderror" placeholder="Quantity (Maximum of 5)" value="{{ old('units', $transaction->units) }}" />
+                        {{-- <input type="number" name="units" class="form-control @error('units') is-invalid @enderror" placeholder="Quantity (Maximum of 5)" value="{{ old('units', $transaction->units) }}" /> --}}
+                        <select name="units" id="units" class="form-control @error('units') is-invalid @enderror">
+                            <option value="1" @if($transaction->units == 1)selected @endif>1</option>
+                            <option value="2" @if($transaction->units == 2)selected @endif>2</option>
+                            <option value="3" @if($transaction->units == 3)selected @endif>3</option>
+                            <option value="4" @if($transaction->units == 4)selected @endif>4</option>
+                            <option value="5" @if($transaction->units == 5)selected @endif>5</option>
+                        </select>
                         @error('units') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div> 
@@ -69,7 +76,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="dateofbirth">Date of Birth <small>(18-70 years old)</small></label>
-                        <input type="date" id="dateofbirth" name="dateofbirth" class="form-control @error('dateofbirth') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('dateofbirth', $transaction->dateofbirth) }}" />
+                        <input type="date" id="dateofbirth" name="dateofbirth" class="form-control @error('dateofbirth') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('dateofbirth', $transaction->dateofbirth->format('Y-m-d')) }}" />
                         @error('dateofbirth') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>
@@ -88,7 +95,12 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="relationship">Relationship</label>
-                        <input type="text" id="relationship" name="relationship" class="form-control text-uppercase @error('relationship') is-invalid @enderror" placeholder="Relationship" value="{{ old('relationship', $transaction->relationship) }}" />
+                        {{-- <input type="text" id="relationship" name="relationship" class="form-control text-uppercase @error('relationship') is-invalid @enderror" placeholder="Relationship" value="{{ old('relationship', $transaction->relationship) }}" /> --}}
+                        <select name="relationship" id="relationship" class="form-control @error('relationship') is-invalid @enderror">
+                            @foreach ($relationships as $relationship)
+                                <option value="{{$relationship->name}}" @if($relationship->name == $transaction->relationship) selected @endif>{{$relationship->name}}</option>
+                            @endforeach
+                        </select>
                         @error('relationship') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>

@@ -23,6 +23,7 @@ class CommonController extends Controller
             case 'B':  return 'Pinoy Protect - Plus';  break;
             case 'D':  return 'Family Protect';        break;
             case 'R':  return "Pawner's Protect";      break;
+            case 'M':  return "Mediphone";             break;
         }
     }
 
@@ -34,6 +35,7 @@ class CommonController extends Controller
             case 'Pinoy Protect - Plus':  'B';  break;
             case 'Family Protect':        'D';  break;
             case "Pawner's Protect":      'R';  break;
+            case "Mediphone":             'M';  break;
         }
     }
 

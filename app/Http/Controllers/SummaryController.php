@@ -121,7 +121,7 @@ class SummaryController extends Controller
         ini_set('memory_limit', '-1');
         set_time_limit(0);
 
-        $query = DB::table('transaction AS t')
+        $query = DB::table('transactions AS t')
             ->leftJoin('users as u', 't.userid_created', '=', 'u.id')
             ->leftJoin('branches as b', 'b.id', '=', 'u.branch_id')
             // ->where('t.status', '!=', 'deleted')

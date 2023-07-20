@@ -46,12 +46,14 @@ class DetailedController extends Controller
         ini_set('memory_limit', '-1');
         set_time_limit(0);
 
-        $transactions = DB::table('transaction as t')
+        $transactions = DB::table('transactions as t')
             ->leftJoin('users as u', 't.userid_created', '=', 'u.id')
             ->leftJoin('branches as b', 'b.id', '=', 'u.branch_id')
+            ->leftJoin('areas as a', 'a.id', '=', 'b.area_id')
+            ->leftJoin('regions as r', 'r.id', '=', 'a.region_id')
             ->select(['t.coi_number', 't.policy_number', 't.insured_name', 't.type', 't.units', 't.price', 
-                't.date_issued', 't.status', 't.posted', 't.created_at', 'b.branch_name', 'u.username'])
-            ->where('t.status', '!=', 'deleted')
+                't.date_issued', 't.status', 't.posted', 'r.region_name', 't.created_at', 'b.branch_name', 'u.username'])
+            // ->where('t.status', '!=', 'deleted')
             ->whereBetween('date_issued', [$request->date_from, $request->date_to])
             ->when($request->input('product'), function($query, $products) {
                     return $query->whereIn('type', $products);
@@ -70,8 +72,6 @@ class DetailedController extends Controller
                 })
             ->orderBy('t.id')
             ->get();
-
-        // dd($transactions);
 
             // ->chunk(2500, function($transactions) use ($spreadsheet, &$row, &$with_transaction, $request) { // READ AND USE $row
                 // if($request->product) {
@@ -106,9 +106,10 @@ class DetailedController extends Controller
                 $sheet->setCellValue('G4', 'Date Issued');
                 $sheet->setCellValue('H4', 'Status');
                 $sheet->setCellValue('I4', 'Posted');
-                $sheet->setCellValue('J4', 'User Branch');
-                $sheet->setCellValue('K4', 'User Name');
-                $sheet->setCellValue('L4', 'Date/Time Created');
+                $sheet->setCellValue('J4', 'Region');
+                $sheet->setCellValue('K4', 'User Branch');
+                $sheet->setCellValue('L4', 'User Name');
+                $sheet->setCellValue('M4', 'Date/Time Created');
 
                 foreach($transactions as $transaction)
                 {
@@ -120,12 +121,13 @@ class DetailedController extends Controller
                     $sheet->setCellValue('E'.$row, $transaction->units);
                     $sheet->setCellValue('F'.$row, $transaction->price);
                     $sheet->setCellValue('G'.$row,  Carbon::parse($transaction->date_issued)->format('m/d/Y'));
-                    $sheet->setCellValue('H'.$row, $transaction->status);
+                    $sheet->setCellValue('H'.$row, ($transaction->status == 'deleted') ? 'CANCELLED' : strtoupper($transaction->status));
                     $sheet->setCellValue('I'.$row, $transaction->posted);
                     // $sheet->setCellValue('J'.$row, $transaction->userbranch);
-                    $sheet->setCellValue('J'.$row, $transaction->branch_name);
-                    $sheet->setCellValue('K'.$row, $transaction->username);
-                    $sheet->setCellValue('L'.$row, Carbon::parse($transaction->created_at)->format('m/d/Y H:i:s'));
+                    $sheet->setCellValue('J'.$row, $transaction->region_name);
+                    $sheet->setCellValue('K'.$row, $transaction->branch_name);
+                    $sheet->setCellValue('L'.$row, $transaction->username);
+                    $sheet->setCellValue('M'.$row, Carbon::parse($transaction->created_at)->format('m/d/Y H:i:s'));
                     $row++;
                 }
                 // dd($transaction->getQueryString());

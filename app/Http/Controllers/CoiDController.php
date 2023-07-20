@@ -14,6 +14,8 @@ use App\Setting;
 use App\Rules\AgeRestriction4;
 use DB;
 use PDF;
+use App\Relationship;
+use App\Rules\AlphabetStringOnly;
 
 class CoiDController extends Controller
 {
@@ -37,17 +39,18 @@ class CoiDController extends Controller
     public function create()
     {
         $branch = Branch::find(auth()->user()->branch_id);
+        $relationships = Relationship::where('status', true)->get();
         $datenow = date('Y-m-d');
-        return view('transactions.coi_d.create', compact('branch', 'datenow'));
+        return view('transactions.coi_d.create', compact('branch', 'datenow', 'relationships'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'insured_name' => 'required',
+            'insured_name' => ['required', new AlphabetStringOnly],
             'dateofbirth' => ['required', new AgeRestriction4],
             'relationship' => 'required',
-            'beneficiary' => 'required',
+            'beneficiary' => ['required', new AlphabetStringOnly],
             'units' => 'required|numeric|between:1,5',
         ]);
         
@@ -93,6 +96,7 @@ class CoiDController extends Controller
 
             // $branch = Branch::find(auth()->user()->branch_id);
             $transaction = Transaction::find(Crypt::decrypt($id));
+            $relationships = Relationship::where('status', true)->get();
 
         } catch(\Exception $exception) {
 
@@ -101,7 +105,7 @@ class CoiDController extends Controller
 
         }
 
-        return view('transactions.coi_d.show', compact('id', 'transaction'));
+        return view('transactions.coi_d.show', compact('id', 'transaction', 'relationships'));
     }
 
     public function edit($id)
@@ -109,6 +113,7 @@ class CoiDController extends Controller
         try {
 
             $transaction = Transaction::find(Crypt::decrypt($id));
+            $relationships = Relationship::where('status', true)->get();
         
         } catch(\Exception $exception) {
 
@@ -117,16 +122,16 @@ class CoiDController extends Controller
 
         }
         
-        return view('transactions.coi_d.edit')->with('transaction', $transaction);
+        return view('transactions.coi_d.edit', compact('transaction', 'relationships'));
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'insured_name' => 'required',
+            'insured_name' => ['required', new AlphabetStringOnly],
             'dateofbirth' => ['required', new AgeRestriction4],
             'relationship' => 'required',
-            'beneficiary' => 'required',
+            'beneficiary' => ['required', new AlphabetStringOnly],
             'units' => 'required|numeric|between:1,5',
             'reason' => 'required',
         ]);
@@ -155,7 +160,7 @@ class CoiDController extends Controller
         return redirect()->route('coi_d.show', Crypt::encrypt($transaction->id));
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $this->validate($request, [
             'reason' => 'required',

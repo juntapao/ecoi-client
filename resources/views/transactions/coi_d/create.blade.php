@@ -44,7 +44,14 @@
                     </div> --}}
                     <div class="form-group col-md-4">
                         <label for="units">Number of Units</label>
-                        <input type="number" name="units" class="form-control @error('units') is-invalid @enderror" placeholder="Quantity (Maximum of 5)" value="{{ old('units') }}" />
+                        {{-- <input type="number" name="units" class="form-control @error('units') is-invalid @enderror" placeholder="Quantity (Maximum of 5)" value="{{ old('units') }}" /> --}}
+                        <select name="units" id="units" class="form-control @error('units') is-invalid @enderror">
+                            <option value="1" @if(old('units') == 1)selected @endif>1</option>
+                            <option value="2" @if(old('units') == 2)selected @endif>2</option>
+                            <option value="3" @if(old('units') == 3)selected @endif>3</option>
+                            <option value="4" @if(old('units') == 4)selected @endif>4</option>
+                            <option value="5" @if(old('units') == 5)selected @endif>5</option>
+                        </select>
                         @error('units') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div> 
@@ -55,7 +62,7 @@
                         @error('insured_name') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="dateofbirth">Date of Birth <small>(7-70 years old)</label>
+                        <label for="dateofbirth">Date of Birth <small>(7-70 years old)</small></label>
                         <input type="date" id="dateofbirth" name="dateofbirth" class="form-control @error('dateofbirth') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('dateofbirth') }}" />
                         @error('dateofbirth') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
@@ -68,7 +75,13 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="relationship">Relationship</label>
-                        <input type="text" id="relationship" name="relationship" class="form-control text-uppercase @error('relationship') is-invalid @enderror" placeholder="Relationship" value="{{ old('relationship') }}" />
+                        {{-- <input type="text" id="relationship" name="relationship" class="form-control text-uppercase @error('relationship') is-invalid @enderror" placeholder="Relationship" value="{{ old('relationship') }}" /> --}}
+                        <select name="relationship" id="relationship" class="form-control @error('relationship') is-invalid @enderror">
+                            <option value="" selected>- SELECTED -</option>
+                            @foreach ($relationships as $relationship)
+                                <option value="{{$relationship->name}}" @if(old('relationship') == $relationship->name)selected @endif>{{$relationship->name}}</option>
+                            @endforeach
+                        </select>
                         @error('relationship') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>

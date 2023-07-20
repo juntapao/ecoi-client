@@ -64,7 +64,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label>Date of Birth</label>
-                    <input type="date" class="form-control" value="{{ $transaction->dateofbirth }}" readonly />
+                    <input type="date" class="form-control" value="{{ $transaction->dateofbirth->format('Y-m-d') }}" readonly />
                 </div>
             </div>
             <div class="row">

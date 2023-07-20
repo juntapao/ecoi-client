@@ -44,7 +44,14 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="units">Number of Units</label>
-                        <input type="number" name="units" class="form-control @error('units') is-invalid @enderror" placeholder="Quantity (Maximum of 5)" value="{{ old('units') }}" />
+                        {{-- <input type="number" name="units" class="form-control @error('units') is-invalid @enderror" placeholder="Quantity (Maximum of 5)" value="{{ old('units') }}" /> --}}
+                        <select name="units" id="units" class="form-control @error('units') is-invalid @enderror">
+                            <option value="1" @if(old('units') == 1)selected @endif>1</option>
+                            <option value="2" @if(old('units') == 2)selected @endif>2</option>
+                            <option value="3" @if(old('units') == 3)selected @endif>3</option>
+                            <option value="4" @if(old('units') == 4)selected @endif>4</option>
+                            <option value="5" @if(old('units') == 5)selected @endif>5</option>
+                        </select>
                         @error('units') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div> 

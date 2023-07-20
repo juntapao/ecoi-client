@@ -13,6 +13,7 @@ use App\Insuran_price;
 use App\Setting;
 use DB;
 use PDF;
+use App\Rules\AlphabetStringOnly;
 
 class CoiAOController extends Controller
 {
@@ -43,8 +44,8 @@ class CoiAOController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'insured_name' => 'required',
-            'beneficiary' => 'required',
+            'insured_name' => ['required', new AlphabetStringOnly],
+            'beneficiary' => ['required', new AlphabetStringOnly],
             'units' => 'required|numeric|between:1,5',
         ]);
         
@@ -118,8 +119,8 @@ class CoiAOController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'insured_name' => 'required',
-            'beneficiary' => 'required',
+            'insured_name' => ['required', new AlphabetStringOnly],
+            'beneficiary' => ['required', new AlphabetStringOnly],
             'units' => 'required|min:1|max:5',
             'reason' => 'required',
         ]);
@@ -148,7 +149,7 @@ class CoiAOController extends Controller
         return redirect()->route('coi_ao.show', Crypt::encrypt($transaction->id));
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $this->validate($request, [
             'reason' => 'required',
