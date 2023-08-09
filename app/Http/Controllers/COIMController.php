@@ -263,7 +263,7 @@ class CoiMController extends Controller
                 PDF::SetPrintHeader(false);
                 PDF::AddPage('P', 'A4');
                 PDF::SetAutoPageBreak(false);
-                PDF::Image(public_path('images/mdr.png'), 115, 106, 25);
+                PDF::Image(public_path('images/mdr.png'), 115, 114, 25);
                 // PDF::Image(public_path('images/logo.png'), 107, 12, 20);
                 PDF::Image(public_path('images/logo.png'), 141, 272, 12);
                 PDF::Image(public_path('images/ml_logo.png'), 15, 12, 48);

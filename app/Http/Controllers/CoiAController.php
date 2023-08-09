@@ -349,7 +349,7 @@ class CoiAController extends Controller
                 PDF::AddPage("P", "A4");
                 PDF::SetFooterMargin(PDF_MARGIN_FOOTER);
                 PDF::SetAutoPageBreak(FALSE, 0);
-                PDF::Image(public_path('images/mdr.png'), 130, 126, 25);
+                PDF::Image(public_path('images/mdr.png'), 130, 128, 25);
                 PDF::Image(public_path('images/logo.png'), 107, 12, 20);
                 PDF::Image(public_path('images/ml_logo.png'), 15, 12, 48);
                 //PDF::Image("../public/images/logo.png", 10, 13, 30.5);

@@ -186,7 +186,7 @@
         <tr>
             <td></td>
             <td colspan="2" align="left"><span class="font-9">Relationship to the member: <u>{{ $transaction->relationship }}</u></span></td>
-            <td align="left"><span class="font-9"><i>Deputy CEO / Executive Vice President</i></span></td>
+            <td align="left"><span class="font-9"><i>President & CEO</i></span></td>
             <td></td>
         </tr>
         <tr>
