@@ -12,7 +12,7 @@ class CommonController extends Controller
     {
         // $coi_number = DB::table('transactions')->max('coi_number');
         $terminal_coi_number = Transaction::max('terminal_coi_number');
-        return substr('0000000'.(intval($terminal_coi_number) + 1), -7);
+        return substr('00000000'.(intval($terminal_coi_number) + 1), -8);
     }
 
     public static function getTransactionType($type)
