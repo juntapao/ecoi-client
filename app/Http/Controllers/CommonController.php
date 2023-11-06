@@ -12,7 +12,7 @@ class CommonController extends Controller
     {
         // $coi_number = DB::table('transactions')->max('coi_number');
         $terminal_coi_number = Transaction::max('terminal_coi_number');
-        return substr('00000000'.(intval($terminal_coi_number) + 1), -8);
+        return substr('0000000'.(intval($terminal_coi_number) + 1), -7);
     }
 
     public static function getTransactionType($type)
@@ -24,6 +24,8 @@ class CommonController extends Controller
             case 'D':  return 'Family Protect';        break;
             case 'R':  return "Pawner's Protect";      break;
             case 'M':  return "Mediphone";             break;
+            case 'BF': return "Pinoy Protect Five";    break;
+            case 'DT': return "Family Protect Ten";    break;
         }
     }
 
@@ -36,6 +38,8 @@ class CommonController extends Controller
             case 'Family Protect':        'D';  break;
             case "Pawner's Protect":      'R';  break;
             case "Mediphone":             'M';  break;
+            case "Pinoy Protect Five":    'BF'; break;
+            case "Family Protect Ten":    'DT'; break;
         }
     }
 

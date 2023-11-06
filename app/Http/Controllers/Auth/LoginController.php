@@ -61,7 +61,7 @@ class LoginController extends Controller
             $userRoleAccess = UserRole::find($roleId)->access;
             $terminalSignature = Setting::where('name', 'terminal_signature')->first()->value;
             $terminalId = Setting::where('name', 'terminal_id')->first()->value;
-            $systemSettings = Setting::whereIn('name', ['family_protect_plus', 'kp_protect', 'family_protect', 'pawners_protect', 'pinoy_protect_plus', 'mediphone'])
+            $systemSettings = Setting::whereIn('name', ['family_protect_plus', 'kp_protect', 'family_protect', 'pawners_protect', 'pinoy_protect_plus', 'mediphone', 'family_protect_ten', 'pinoy_protect_five'])
                 ->select(['name', 'value'])
                 ->get()->toArray();
             $insurancePrices = Insuran_price::select(['id', 'coi_type', 'price'])

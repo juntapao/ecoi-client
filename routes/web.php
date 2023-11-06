@@ -73,6 +73,20 @@ Route::middleware(['auth', 'check-network', 'sync-transactions'])->group(functio
                 Route::get('post/{coi_m}', 'CoiMController@post')->name('coi_m.post');
             });
             Route::resource('coi_m', 'CoiMController');
+
+            Route::prefix('coi_dt')->group(function() {
+                Route::get('search', 'COIDTController@search')->name('coi_dt.search');
+                Route::get('print/{coi_dt}', 'COIDTController@print')->name('coi_dt.print');
+                Route::get('post/{coi_dt}', 'COIDTController@post')->name('coi_dt.post');
+            });
+            Route::resource('coi_dt', 'COIDTController');
+
+            Route::prefix('coi_bf')->group(function() {
+                Route::get('search', 'COIBFController@search')->name('coi_bf.search');
+                Route::get('print/{coi_bf}', 'COIBFController@print')->name('coi_bf.print');
+                Route::get('post/{coi_bf}', 'COIBFController@post')->name('coi_bf.post');
+            });
+            Route::resource('coi_bf', 'COIBFController');
         });
         Route::prefix('reports')->group(function() {
             // POSTED TRANSACTIONS
@@ -84,9 +98,9 @@ Route::middleware(['auth', 'check-network', 'sync-transactions'])->group(functio
             Route::resource('detailed', 'DetailedController')->only(['index', 'store']);
             Route::resource('summary', 'SummaryController')->only(['index', 'store']);
             // ALL TRANSACTIONS
-            Route::get('all/search', 'AllTransactionsController@search')->name('all.search');
-            Route::get('all/filter', 'AllTransactionsController@filter')->name('all.filter');
-            Route::resource('all', 'AllTransactionsController')->only(['index', 'show']);
+            // Route::get('all/search', 'AllTransactionsController@search')->name('all.search');
+            // Route::get('all/filter', 'AllTransactionsController@filter')->name('all.filter');
+            // Route::resource('all', 'AllTransactionsController')->only(['index', 'show']);
         });
     });
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
