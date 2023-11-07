@@ -143,7 +143,7 @@
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings_dateofbirth3 ? Carbon\Carbon::parse($transaction->child_siblings_dateofbirth3)->format('m/d/Y') : null }}" readonly />
                 </div>
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="form-group col-md-4">
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings4 }}" readonly />
                 </div>
@@ -153,7 +153,7 @@
                 <div class="form-group col-md-4">
                     <input type="text" class="form-control" value="{{ $transaction->child_siblings_dateofbirth4 ? Carbon\Carbon::parse($transaction->child_siblings_dateofbirth4)->format('m/d/Y') : null }}" readonly />
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="text-right">
             {{-- <a href="{{ route('coi_dt.index') }}" class="btn btn-primary">Cancel</a> --}}

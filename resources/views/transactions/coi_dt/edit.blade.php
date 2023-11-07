@@ -109,7 +109,7 @@
                         @error('relationship_1_1') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="guardian_dateofbirth">Birth Dates <small>(18 - 70 yrs. old)</small></label>
+                        <label for="guardian_dateofbirth">Birth Dates <small>(under 65 yrs. old)</small></label>
                         <input type="date" id="guardian_dateofbirth" name="guardian_dateofbirth" class="form-control @error('guardian_dateofbirth') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('guardian_dateofbirth', $transaction->guardian_dateofbirth ? $transaction->guardian_dateofbirth->format('Y-m-d') : null) }}">
                         @error('guardian_dateofbirth') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
@@ -207,7 +207,7 @@
                         @error('child_siblings_dateofbirth3') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="form-group col-md-4">
                         <input type="text" id="child_siblings4" name="child_siblings4" class="form-control text-uppercase @error('child_siblings4') is-invalid @enderror" placeholder="Children / Siblings" value="{{ old('child_siblings4', $transaction->child_siblings4) }}" >
                         @error('child_siblings4') <div class="invalid-feedback">{{ $message }} </div> @enderror
@@ -228,7 +228,7 @@
                         <input type="date" id="child_siblings_dateofbirth4" name="child_siblings_dateofbirth4" class="form-control @error('child_siblings_dateofbirth4') is-invalid @enderror" placeholder="Date of Birth" value="{{ old('child_siblings_dateofbirth4', $transaction->child_siblings_dateofbirth4 ? $transaction->child_siblings_dateofbirth4->format('Y-m-d') : null) }}" >
                         @error('child_siblings_dateofbirth4') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
-                </div>
+                </div> --}}
                 <div class="row">
                     <div class="form-group col-12">
                         <label for="reason">Reason</label>

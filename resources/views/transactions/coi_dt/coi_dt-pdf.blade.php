@@ -121,7 +121,7 @@
         @endif
 
         {{-- FOR THE SIGNATURE TO NOT BE OUT OF PLACE --}}
-        @for($i = 0; $i < (7 - $counter); $i++)  
+        @for($i = 0; $i < (6 - $counter); $i++)  
             <tr><td></td></tr>
         @endfor
 
@@ -129,7 +129,7 @@
             <td width = "5%"></td>
             <td width = "30%" align="left">Group Policy Holder</td>
             <td width = "10%">:</td>
-            <td width = "50%"><strong>ML FAMILY PROTECT - PLUS</strong></td>
+            <td width = "50%"><strong>ML FAMILY PROTECT TEN</strong></td>
         </tr>
         <tr class="font10">
             <td width = "5%"></td>
@@ -149,7 +149,7 @@
             <th width = "40%"><b>Benefits</b></th>
             <th width = "17%" style="font-size:10px;"><b>Principal</b></th>
             <th width = "17%" style="font-size:10px;"><b>Spouse/Parent</b></th>
-            <th width = "16%" style="font-size:10px;"><b>Children/Sibling</b></th>
+            <th width = "16%" style="font-size:8px;"><b>Per Children/Sibling</b></th>
             <th width = "5%" style="border:none;"></th>
         </tr>
         <tr class="font10 bord">
@@ -171,9 +171,9 @@
         <tr class="font10 bord">
             <td width = "5%" style="border:none;"></td>
             <td width = "40%" align="left">Motorcycling (due to accident)</td>
-            <td width = "17%">PHP {{ number_format($holder['motor_principal'], 2) }}</td>
-            <td width = "17%">PHP {{ number_format($holder['motor_spouse_parents'], 2) }}</td>
-            <td width = "16%">PHP {{ number_format($holder['motor_child_siblings'], 2) }}</td>
+            <td width = "17%">@if($holder['insured_age'] >= 65 && $holder['insured_age'] <= 75) N/A @else PHP {{ number_format($holder['motor_principal'], 2) }} @endif</td>
+            <td width = "17%">@if($holder['insured_age'] >= 65 && $holder['insured_age'] <= 75) N/A @else PHP {{ number_format($holder['motor_spouse_parents'], 2) }} @endif</td>
+            <td width = "16%">@if($holder['insured_age'] >= 65 && $holder['insured_age'] <= 75) N/A @else PHP {{ number_format($holder['motor_child_siblings'], 2) }} @endif</td>
             <td width = "5%" style="border:none;"></td>
         </tr>
         <tr class="font10 bord">
@@ -187,15 +187,15 @@
         <tr class="font10 bord">
             <td width = "5%" style="border:none;"></td>
             <td width = "40%" align="left">Ambulance Service Fee due to accident only</td>
-            <td width = "17%">PHP {{ number_format($holder['ambulance'], 2) }}</td>
-            <td width = "17%">PHP {{ number_format($holder['ambulance'], 2) }}</td>
-            <td width = "16%">PHP {{ number_format($holder['ambulance'], 2) }}</td>
+            <td width = "17%">@if($holder['insured_age'] >= 65 && $holder['insured_age'] <= 75) N/A @else PHP {{ number_format($holder['ambulance'], 2) }} @endif</td>
+            <td width = "17%">@if($holder['insured_age'] >= 65 && $holder['insured_age'] <= 75) N/A @else PHP {{ number_format($holder['ambulance'], 2) }} @endif</td>
+            <td width = "16%">@if($holder['insured_age'] >= 65 && $holder['insured_age'] <= 75) N/A @else PHP {{ number_format($holder['ambulance'], 2) }} @endif</td>
             <td width = "5%" style="border:none;"></td>
         </tr>
         <tr class="font10 bord">
             <td width = "5%" style="border:none;"></td>
             <td width = "40%" align="left">Family Cash Assistance Benefit</td>
-            <td width = "17%">PHP {{ number_format($holder['cash_principal'], 2) }}</td>
+            <td width = "17%">@if($holder['insured_age'] >= 65 && $holder['insured_age'] <= 75) N/A @else PHP {{ number_format($holder['cash_principal'], 2) }} @endif</td>
             <td width = "17%">N/A</td>
             <td width = "16%">N/A</td>
             <td width = "5%" style="border:none;"></td>

@@ -304,6 +304,15 @@ class COIBFController extends Controller
                 $holder['motor_principal'] = number_format(($sum_insured > 20000 ? 20000 : 10000), 2);
                 $holder['burial_principal'] = number_format(5000, 2);
             
+                $holder['insured_age'] = Carbon::parse($transaction->dateofbirth)->age;
+
+                if($holder['insured_age'] >= 65 && $holder['insured_age'] <= 75) {
+                    $holder['accident_principal'] = number_format(str_replace(',','',$holder['accident_principal']) / 2, 2);
+                    $holder['unprovoked_principal'] = number_format(str_replace(',','',$holder['unprovoked_principal']) / 2, 2);
+                    $holder['motor_principal'] = number_format(str_replace(',','',$holder['motor_principal']) / 2, 2);
+                    $holder['burial_principal'] = number_format(str_replace(',','',$holder['burial_principal']) / 2, 2);
+                }
+
                 $view = \View::make('transactions.coi_bf.coi_bf-pdf', compact('transaction', 'holder'));
                 $html_content = $view->render();
                 PDF::SetTitle('COI BF');
@@ -314,8 +323,6 @@ class COIBFController extends Controller
                 PDF::Image(public_path('images/logo.png'), 107, 12, 20);
                 PDF::Image(public_path('images/ml_logo.png'), 15, 12, 48);
                 PDF::writeHTML($html_content, true, false, true, false, '');
-                PDF::SetFont('Helvetica', '', 10);
-                PDF::Output('COI BF.pdf');
                 
             } else {
 

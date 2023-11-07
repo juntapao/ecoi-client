@@ -33,7 +33,7 @@
     </div>
     <div class="card-header border-0">
         <div class="container">
-            @if($transaction->type == 'A')
+            @if($transaction->type == 'A' || $transaction->type == 'DT')
                 <div class="row">
                     <div class="form-group col-12 col-md-6">
                         <label>COI Number</label>
@@ -166,7 +166,7 @@
                         <input type="text" class="form-control" value="{{ $transaction->beneficiary }}" readonly />
                     </div>
                 </div>
-            @elseif($transaction->type == 'B')
+            @elseif($transaction->type == 'B' || $transaction->type == 'BF')
                 <div class="row">
                     <div class="form-group col-12 col-md-6">
                         <label>COI Number</label>

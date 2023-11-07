@@ -19,6 +19,7 @@ use App\Rules\AgeRestriction;
 use App\Rules\AgeRestriction1;
 use App\Rules\AgeRestriction2;
 use App\Rules\AgeRestriction5;
+use App\Rules\AgeRestriction7;
 use App\Rules\AlphabetStringOnly;
 use Illuminate\Support\Facades\Crypt;
 
@@ -60,8 +61,8 @@ class CoiDTController extends Controller
             'child_siblings2' => ['required_with:child_siblings_dateofbirth2|required_with:relationship_2_2', new AlphabetStringOnly],
             'child_siblings3' => ['required_with:child_siblings_dateofbirth3|required_with:relationship_2_3', new AlphabetStringOnly],
             'child_siblings4' => ['required_with:child_siblings_dateofbirth4|required_with:relationship_2_4', new AlphabetStringOnly],
-            'guardian_dateofbirth' => ['required_with:guardian', new AgeRestriction1],
-            'guardian_dateofbirth2' => ['required_with:guardian2', new AgeRestriction1],
+            'guardian_dateofbirth' => ['required_with:guardian', new AgeRestriction7],
+            'guardian_dateofbirth2' => ['required_with:guardian2', new AgeRestriction7],
             'child_siblings_dateofbirth' =>  ['required_with:child_siblings', new AgeRestriction2],
             'child_siblings_dateofbirth2' => ['required_with:child_siblings2', new AgeRestriction2],
             'child_siblings_dateofbirth3' => ['required_with:child_siblings3', new AgeRestriction2],
@@ -172,9 +173,9 @@ class CoiDTController extends Controller
             'insured_name' => ['required', new AlphabetStringOnly],
             'dateofbirth' => ['required', new AgeRestriction5],
             'guardian' => ['required_with:guardian_dateofbirth', new AlphabetStringOnly],
-            'guardian_dateofbirth' => ['required_with:guardian', new AgeRestriction1],
+            'guardian_dateofbirth' => ['required_with:guardian', new AgeRestriction7],
             'guardian2' => ['required_with:guardian_dateofbirth2', new AlphabetStringOnly],
-            'guardian_dateofbirth2' => ['required_with:guardian2', new AgeRestriction1],
+            'guardian_dateofbirth2' => ['required_with:guardian2', new AgeRestriction7],
             'child_siblings' => ['required_with:child_siblings_dateofbirth', new AlphabetStringOnly],
             'child_siblings_dateofbirth' =>  ['required_with:child_siblings', new AgeRestriction2],
             'child_siblings2' => ['required_with:child_siblings_dateofbirth2', new AlphabetStringOnly],
@@ -329,9 +330,21 @@ class CoiDTController extends Controller
                 $holder['accident_principal'] = $sum_insured;
                 $holder['unprovoked_principal'] = $sum_insured > 20000 ? 20000 : 10000;
                 $holder['motor_principal'] = ($sum_insured > 20000 ? 20000 : 10000);
-                $holder['burial_principal'] = 5000;
-                $holder['cash_principal'] = 2500;
+                $holder['burial_principal'] = ($sum_insured > 20000 ? 10000 : 5000);
+                $holder['cash_principal'] = ($sum_insured > 20000 ? 5000 : 2500);
                 $holder['ambulance'] = 500;
+
+                $holder['insured_age'] = Carbon::parse($transaction->dateofbirth)->age;
+                $holder['spouse_parents_age_1'] = Carbon::parse($transaction->guardian_dateofbirth)->age;
+                if($transaction->guardian_dateofbirth2 != '' && $transaction->guardian_dateofbirth2 != null)
+                    $holder['spouse_parents_age_2'] = Carbon::parse($transaction->guardian_dateofbirth2)->age;
+
+                if($holder['insured_age'] >= 71 && $holder['insured_age'] <= 75) {
+                    $holder['accident_principal'] = str_replace(',','',$holder['accident_principal']) / 2;
+                    $holder['unprovoked_principal'] = str_replace(',','',$holder['unprovoked_principal']) / 2;
+                    $holder['motor_principal'] = str_replace(',','',$holder['motor_principal']) / 2;
+                    $holder['burial_principal'] = str_replace(',','',$holder['burial_principal']) / 2;
+                }
     
                 $holder['accident_spouse_parents'] = $holder['accident_principal'] / 2;
                 $holder['unprovoked_spouse_parents'] = $holder['unprovoked_principal'] / 2;
@@ -341,8 +354,8 @@ class CoiDTController extends Controller
                 // $holder['fire_spouse_parents'] = 'N/A';
     
                 $holder['accident_child_siblings'] = $holder['accident_principal'] / 4;
-                $holder['unprovoked_child_siblings'] = $holder['unprovoked_principal'] / 2;
-                $holder['motor_child_siblings'] = $holder['motor_principal'] / 2;
+                $holder['unprovoked_child_siblings'] = $holder['unprovoked_principal'] / 4;
+                $holder['motor_child_siblings'] = $holder['motor_principal'] / 4;
                 $holder['burial_child_siblings'] = $holder['burial_principal'] / 4;
                 $holder['cash_child_siblings'] = $holder['cash_principal'] / 4;
                 // $holder['fire_child_siblings'] = 'N/A';
@@ -353,7 +366,7 @@ class CoiDTController extends Controller
                 PDF::AddPage("P", "A4");
                 PDF::SetFooterMargin(PDF_MARGIN_FOOTER);
                 PDF::SetAutoPageBreak(FALSE, 0);
-                PDF::Image(public_path('images/mdr.png'), 130, 133, 25);
+                PDF::Image(public_path('images/mdr.png'), 130, 129, 25);
                 PDF::Image(public_path('images/logo.png'), 107, 12, 20);
                 PDF::Image(public_path('images/ml_logo.png'), 15, 12, 48);
                 //PDF::Image("../public/images/logo.png", 10, 13, 30.5);
