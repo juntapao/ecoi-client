@@ -24,6 +24,8 @@ class CommonController extends Controller
             case 'D':  return 'Family Protect';        break;
             case 'R':  return "Pawner's Protect";      break;
             case 'M':  return "Mediphone";             break;
+            case 'BF': return "Pinoy Protect Five";    break;
+            case 'DT': return "Family Protect Ten";    break;
         }
     }
 
@@ -36,6 +38,8 @@ class CommonController extends Controller
             case 'Family Protect':        'D';  break;
             case "Pawner's Protect":      'R';  break;
             case "Mediphone":             'M';  break;
+            case "Pinoy Protect Five":    'BF'; break;
+            case "Family Protect Ten":    'DT'; break;
         }
     }
 

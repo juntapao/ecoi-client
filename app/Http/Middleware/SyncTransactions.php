@@ -40,7 +40,7 @@ class SyncTransactions
                     foreach($server->data as $key => $value) {
                         Transaction::where('terminal_coi_number', $value)
                             ->update([
-                                'coi_number' => str_pad($key, 7, '0', STR_PAD_LEFT),
+                                'coi_number' => str_pad($key, 8, '0', STR_PAD_LEFT),
                                 'uploaded' => true,
                             ]);
                     }
