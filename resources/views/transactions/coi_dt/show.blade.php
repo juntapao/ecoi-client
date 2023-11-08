@@ -63,7 +63,7 @@
                     <input type="text" class="form-control" value="{{ $transaction->insured_name }}" readonly />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Birth Date <small>(7 - 75 yrs. old)</small></label>
+                    <label>Birth Date <small>(18 - 75 yrs. old)</small></label>
                     <input type="text" class="form-control" value="{{ $transaction->dateofbirth ? Carbon\Carbon::parse($transaction->dateofbirth)->format('m/d/Y') : null }}" readonly />
                 </div>
             </div>
@@ -91,7 +91,7 @@
                     <input type="text" class="form-control" value="{{ $transaction->dependents->where('field', '1_1')->first() ? $transaction->dependents->where('field', '1_1')->first()->relationship : '' }}" readonly />
                 </div>
                 <div class="form-group col-md-4">
-                    <label>Birth Dates <small>(18 - 70 yrs. old)</small></label>
+                    <label>Birth Dates <small>(under 65 yrs. old)</small></label>
                     <input type="text" class="form-control" value="{{ $transaction->guardian_dateofbirth ? Carbon\Carbon::parse($transaction->guardian_dateofbirth)->format('m/d/Y') : null }}" readonly />
                 </div>
             </div>

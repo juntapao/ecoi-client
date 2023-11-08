@@ -17,7 +17,7 @@ class InsertNewInsurancePrices extends Migration
         DB::table('insuran_prices')->insert(
             [
                 'coi_type' => 'Family Protect Ten',
-                'price' => 3.00,
+                'price' => 10.00,
                 'status' => 1,
                 'userid_created' => 1,
                 'userid_modified' => 1,
@@ -28,7 +28,7 @@ class InsertNewInsurancePrices extends Migration
         DB::table('insuran_prices')->insert(
             [
                 'coi_type' => 'Pinoy Protect Five',
-                'price' => 1.00,
+                'price' => 5.00,
                 'status' => 1,
                 'userid_created' => 1,
                 'userid_modified' => 1,

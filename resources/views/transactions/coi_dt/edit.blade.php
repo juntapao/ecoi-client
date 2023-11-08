@@ -68,7 +68,7 @@
                         @error('insured_name') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="dateofbirth">Birth Date <small>(7 - 75 yrs. old)</small></label>
+                        <label for="dateofbirth">Birth Date <small>(18 - 75 yrs. old)</small></label>
                         <input type="date" name="dateofbirth" class="form-control @error('dateofbirth') is-invalid @enderror" value="{{ old('dateofbirth', $transaction->dateofbirth ? $transaction->dateofbirth->format('Y-m-d') : null) }}">
                         @error('dateofbirth') <div class="invalid-feedback">{{ $message }} </div> @enderror
                     </div>

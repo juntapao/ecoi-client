@@ -29,7 +29,7 @@ class AgeRestriction5 implements Rule
             $datetime1 = date_create($value);
             $datetime2 = date_create(date('Y-m-d'));
             $year = date_diff($datetime2, $datetime1)->format('%y');
-            if($year >= 7 && $year <= 75) return true; // AGE RESTRICTION 7-75 ONLY
+            if($year >= 18 && $year <= 75) return true; // AGE RESTRICTION 18-75 ONLY
             else return false;
         } else return true;
     }
@@ -41,6 +41,6 @@ class AgeRestriction5 implements Rule
      */
     public function message()
     {
-        return 'Age is restricted to 7-75 only.';
+        return 'Age is restricted to 18-75 only.';
     }
 }
