@@ -197,7 +197,7 @@
                     <table cellspacing="0" cellpadding="5">
                         <tr>
                             <td width="10%"></td>
-                            <td width="80%" class="border-all"><font size="8"><b>24/7 Hotline Number: +632-8-459-4726<br />Email address: <u>ficosiam@iberoasistencia.ph</u></b><br /><b>FB Messenger:</b> PACIFICO ASSISTANCE</font></td>
+                            <td width="80%" class="border-all"><font size="8"><b>24/7 Hotline Number: +632-8-459-4726<br />Email address: <u>operationsph@pacifico-assistance.com.ph</u></b><br /><b>FB Messenger:</b> PACIFICO ASSISTANCE</font></td>
                             <td width="10%"></td>
                         </tr>
                     </table></td>
