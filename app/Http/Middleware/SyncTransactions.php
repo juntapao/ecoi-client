@@ -24,10 +24,20 @@ class SyncTransactions
 
             $terminal_signature = session('terminalSignature');
     
+            $uploaded = [];
             foreach($transactions as $transaction) {
                 $transaction->terminal_id = session('terminalId');
+                if($transaction->status == 'deleted' || $transaction->posted == true)
+                    $uploaded[] = $transaction->id;
             }
             
+            if(count($uploaded) > 0){
+                Transaction::whereIn('id', $uploaded)
+                    ->update([
+                        'uploaded' => true,
+                    ]);
+            }
+
             $body = [
                 'terminal_signature' => $terminal_signature,
                 'data' => json_encode($transactions->toArray()),
@@ -41,7 +51,7 @@ class SyncTransactions
                         Transaction::where('terminal_coi_number', $value)
                             ->update([
                                 'coi_number' => str_pad($key, 8, '0', STR_PAD_LEFT),
-                                'uploaded' => true,
+                                // 'uploaded' => true,
                             ]);
                     }
                 }

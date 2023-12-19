@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
+use DB;
+use Auth;
+use App\Menu;
+use App\User;
+use App\Setting;
+use App\UserRole;
+
+use Carbon\Carbon;
+use App\Transaction;
+use App\Insuran_price;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CommonController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
-
-use App\User;
-use App\Menu;
-use App\UserRole;
-use App\Setting;
-use App\Insuran_price;
-use DB;
-use Auth;
 
 class LoginController extends Controller
 {
@@ -51,6 +52,25 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        $user_id = User::where('username', $request->username)->first()->id;
+        // $latest_transaction = Transaction::select('date_issued')
+        //     ->where('userid_created', $user_id)
+        //     ->where('posted', false)
+        //     ->where('status', '!=', 'deleted')
+        //     ->orderBy('date_issued', 'desc')
+        //     ->first()
+        //     ->date_issued;
+
+        // if(Carbon::parse($latest_transaction)->lt(Carbon::today())){
+            Transaction::where('posted', false)
+                ->whereDate('date_issued', '<', Carbon::today()->format('Y-m-d'))
+                ->where('userid_created', $user_id)
+                ->where('status', '!=', 'deleted')
+                ->update([
+                    'status' => 'deleted'
+                ]);
+        // }
+
         if(Auth::attempt([
             'username' => $request->username,
             'password' => $request->password
