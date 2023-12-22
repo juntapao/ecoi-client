@@ -215,6 +215,7 @@ class CoiDTController extends Controller
             $transaction->child_siblings4 = strtoupper($request->child_siblings4);
             $transaction->child_siblings_dateofbirth4 = $request->child_siblings_dateofbirth4;
             $transaction->reason = strtoupper($request->reason);
+            $transaction->uploaded = false;
             $transaction->status = 'edited';
             $transaction->userid_modified = auth()->user()->id;
             $transaction->save();
@@ -255,6 +256,7 @@ class CoiDTController extends Controller
         try {
 
             $transaction = Transaction::find(Crypt::decrypt($id));
+            $transaction->uploaded = false;
             $transaction->status = 'deleted';
             $transaction->save();
 
@@ -303,6 +305,7 @@ class CoiDTController extends Controller
         try {
             
             $transaction = Transaction::find(Crypt::decrypt($id));
+            $transaction->uploaded = false;
             $transaction->posted = 1;
             $transaction->save();
 

@@ -53,23 +53,15 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $user_id = User::where('username', $request->username)->first()->id;
-        // $latest_transaction = Transaction::select('date_issued')
-        //     ->where('userid_created', $user_id)
-        //     ->where('posted', false)
-        //     ->where('status', '!=', 'deleted')
-        //     ->orderBy('date_issued', 'desc')
-        //     ->first()
-        //     ->date_issued;
-
-        // if(Carbon::parse($latest_transaction)->lt(Carbon::today())){
-            Transaction::where('posted', false)
-                ->whereDate('date_issued', '<', Carbon::today()->format('Y-m-d'))
-                ->where('userid_created', $user_id)
-                ->where('status', '!=', 'deleted')
-                ->update([
-                    'status' => 'deleted'
-                ]);
-        // }
+        
+        Transaction::where('posted', false)
+            ->whereDate('date_issued', '<', Carbon::today()->format('Y-m-d'))
+            ->where('userid_created', $user_id)
+            ->where('status', '!=', 'deleted')
+            ->update([
+                'status' => 'deleted',
+                'uploaded' => false,
+            ]);
 
         if(Auth::attempt([
             'username' => $request->username,
@@ -115,7 +107,7 @@ class LoginController extends Controller
                 'insurancePrices' => $insurancePrices,
             ]);
 
-            // dd($parentmenu);
+            // dd($parentmenu,$childmenu,$userRole,$branchName,$systemSettings);
 
             return redirect()->route('dashboard');
         } else {
