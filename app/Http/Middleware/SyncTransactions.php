@@ -23,11 +23,11 @@ class SyncTransactions
         if($transactions->count()) {
 
             $terminal_signature = session('terminalSignature');
-    
+
             foreach($transactions as $transaction) {
                 $transaction->terminal_id = session('terminalId');
             }
-            
+
             $body = [
                 'terminal_signature' => $terminal_signature,
                 'data' => json_encode($transactions->toArray()),

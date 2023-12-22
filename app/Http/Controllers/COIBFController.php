@@ -152,6 +152,7 @@ class COIBFController extends Controller
             $transaction->beneficiary = strtoupper($request->beneficiary);
             $transaction->relationship = strtoupper($request->relationship);
             $transaction->dateofbirth = $request->dateofbirth;
+            $transaction->uploaded = false;
             $transaction->status = 'edited';
             $transaction->userid_modified = auth()->user()->id;
             $transaction->save();
@@ -176,6 +177,7 @@ class COIBFController extends Controller
         try {
 
             $transaction = Transaction::find(Crypt::decrypt($id));
+            $transaction->uploaded = false;
             $transaction->status = 'deleted';
             $transaction->save();
 
@@ -221,6 +223,7 @@ class COIBFController extends Controller
         try {
             
             $transaction = Transaction::find(Crypt::decrypt($id));
+            $transaction->uploaded = false;
             $transaction->posted = 1;
             $transaction->save();
 
