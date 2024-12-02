@@ -18,28 +18,30 @@ class CommonController extends Controller
     public static function getTransactionType($type)
     {
         switch($type) {
-            case 'A':  return 'Family Protect - Plus'; break;
-            case 'AO': return 'KP Protect';            break;
-            case 'B':  return 'Pinoy Protect - Plus';  break;
-            case 'D':  return 'Family Protect';        break;
-            case 'R':  return "Pawner's Protect";      break;
-            case 'M':  return "Mediphone";             break;
-            case 'BF': return "Pinoy Protect Five";    break;
-            case 'DT': return "Family Protect Ten";    break;
+            case 'A':   return 'Family Protect - Plus'; break;
+            case 'AO':  return 'KP Protect';            break;
+            case 'B':   return 'Pinoy Protect - Plus';  break;
+            case 'D':   return 'Family Protect';        break;
+            case 'R':   return "Pawner's Protect";      break;
+            case 'M':   return "Mediphone";             break;
+            case 'BF':  return "Pinoy Protect Five";    break;
+            case 'DT':  return "Family Protect Ten";    break;
+            case "C":   return "Customer Protect";      break;
         }
     }
 
     public static function getTransactionTypeCode($type)
     {
         switch($type) {
-            case 'Family Protect - Plus': 'A';  break;
-            case 'KP Protect':            'AO'; break;
-            case 'Pinoy Protect - Plus':  'B';  break;
-            case 'Family Protect':        'D';  break;
-            case "Pawner's Protect":      'R';  break;
-            case "Mediphone":             'M';  break;
-            case "Pinoy Protect Five":    'BF'; break;
-            case "Family Protect Ten":    'DT'; break;
+            case 'Family Protect - Plus': return 'A';  break;
+            case 'KP Protect':            return 'AO'; break;
+            case 'Pinoy Protect - Plus':  return 'B';  break;
+            case 'Family Protect':        return 'D';  break;
+            case "Pawner's Protect":      return 'R';  break;
+            case "Mediphone":             return 'M';  break;
+            case "Pinoy Protect Five":    return 'BF'; break;
+            case "Family Protect Ten":    return 'DT'; break;
+            case "Customer Protect":      return 'C';  break;
         }
     }
 

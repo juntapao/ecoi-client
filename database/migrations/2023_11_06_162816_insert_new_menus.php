@@ -15,34 +15,34 @@ class InsertNewMenus extends Migration
      */
     public function up()
     {
-        DB::table('menu')->insert(
-            [
-                'name' => 'coi_dt',
-                'parent' => 1,
-                'label' => 'Family Protect Ten',
-                'link' => '/transactions/coi_dt',
-                'icon' => null,
-                'status' => 1,
-                'userid_created' => 1,
-                'userid_modified' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]
-        );
-        DB::table('menu')->insert(
-            [
-                'name' => 'coi_bf',
-                'parent' => 1,
-                'label' => 'Pinoy Protect Five',
-                'link' => '/transactions/coi_bf',
-                'icon' => null,
-                'status' => 1,
-                'userid_created' => 1,
-                'userid_modified' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(), 
-            ]
-        );
+        // DB::table('menu')->insert(
+        //     [
+        //         'name' => 'coi_dt',
+        //         'parent' => 1,
+        //         'label' => 'Family Protect Ten',
+        //         'link' => '/transactions/coi_dt',
+        //         'icon' => null,
+        //         'status' => 1,
+        //         'userid_created' => 1,
+        //         'userid_modified' => 1,
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now(),
+        //     ]
+        // );
+        // DB::table('menu')->insert(
+        //     [
+        //         'name' => 'coi_bf',
+        //         'parent' => 1,
+        //         'label' => 'Pinoy Protect Five',
+        //         'link' => '/transactions/coi_bf',
+        //         'icon' => null,
+        //         'status' => 1,
+        //         'userid_created' => 1,
+        //         'userid_modified' => 1,
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now(), 
+        //     ]
+        // );
     }
 
     /**

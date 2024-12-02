@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Transaction;
 use App\Branch;
 use DB;
+use PhpOffice\PhpSpreadsheet\Writer\Csv;
 
 class PostedController extends Controller
 {
@@ -84,7 +84,7 @@ class PostedController extends Controller
         ]);
 
         $row = 2;
-        $file_name = 'Posted_Report_'.auth()->user()->id.'.xlsx';
+        $file_name = 'Posted_Report_'.auth()->user()->id.'.csv';
         $spreadsheet = new Spreadsheet();
         $with_transaction = false;
 
@@ -130,7 +130,7 @@ class PostedController extends Controller
         }
         
         if($with_transaction) {
-            $writer = new Xlsx($spreadsheet);
+            $writer = new Csv($spreadsheet);
             $result = $writer->save(public_path('storage/').$file_name);
             session([
                 'download' => $file_name,

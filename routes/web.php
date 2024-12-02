@@ -40,11 +40,11 @@ Route::middleware(['auth', 'check-network', 'sync-transactions'])->group(functio
             Route::resource('coi_a', 'CoiAController');
             // COI AO
             Route::prefix('coi_ao')->group(function() {
-                Route::get('search', 'CoiAOController@search')->name('coi_ao.search');
+//     Route::get('search', 'CoiAOController@search')->name('coi_ao.search');
                 Route::get('print/{coi_ao}', 'CoiAOController@print')->name('coi_ao.print');
-                Route::get('post/{coi_ao}', 'CoiAOController@post')->name('coi_ao.post');
+//     Route::get('post/{coi_ao}', 'CoiAOController@post')->name('coi_ao.post');
             });
-            Route::resource('coi_ao', 'CoiAOController');
+// Route::resource('coi_ao', 'CoiAOController');
             // COI B
             Route::prefix('coi_b')->group(function() {
                 Route::get('search', 'CoiBController@search')->name('coi_b.search');
@@ -61,11 +61,11 @@ Route::middleware(['auth', 'check-network', 'sync-transactions'])->group(functio
             Route::resource('coi_d', 'CoiDController');
             // COI R
             Route::prefix('coi_r')->group(function() {
-                Route::get('search', 'CoiRController@search')->name('coi_r.search');
+//     Route::get('search', 'CoiRController@search')->name('coi_r.search');
                 Route::get('print/{coi_r}', 'CoiRController@print')->name('coi_r.print');
-                Route::get('post/{coi_r}', 'CoiRController@post')->name('coi_r.post');
+//     Route::get('post/{coi_r}', 'CoiRController@post')->name('coi_r.post');
             });
-            Route::resource('coi_r', 'CoiRController');
+// Route::resource('coi_r', 'CoiRController');
             // COI M
             Route::prefix('coi_m')->group(function() {
                 Route::get('search', 'CoiMController@search')->name('coi_m.search');
@@ -75,18 +75,25 @@ Route::middleware(['auth', 'check-network', 'sync-transactions'])->group(functio
             Route::resource('coi_m', 'CoiMController');
 
             Route::prefix('coi_dt')->group(function() {
-                Route::get('search', 'COIDTController@search')->name('coi_dt.search');
+//     Route::get('search', 'COIDTController@search')->name('coi_dt.search');
                 Route::get('print/{coi_dt}', 'COIDTController@print')->name('coi_dt.print');
-                Route::get('post/{coi_dt}', 'COIDTController@post')->name('coi_dt.post');
+//     Route::get('post/{coi_dt}', 'COIDTController@post')->name('coi_dt.post');
             });
-            Route::resource('coi_dt', 'COIDTController');
+// Route::resource('coi_dt', 'COIDTController');
 
             Route::prefix('coi_bf')->group(function() {
-                Route::get('search', 'COIBFController@search')->name('coi_bf.search');
+//     Route::get('search', 'COIBFController@search')->name('coi_bf.search');
                 Route::get('print/{coi_bf}', 'COIBFController@print')->name('coi_bf.print');
-                Route::get('post/{coi_bf}', 'COIBFController@post')->name('coi_bf.post');
+//     Route::get('post/{coi_bf}', 'COIBFController@post')->name('coi_bf.post');
             });
-            Route::resource('coi_bf', 'COIBFController');
+// Route::resource('coi_bf', 'COIBFController');
+            // COI C
+            Route::prefix('coi_c')->group(function() {
+                Route::get('search', 'CoiCController@search')->name('coi_c.search');
+                Route::get('print/{coi_c}', 'CoiCController@print')->name('coi_c.print');
+                Route::get('post/{coi_c}', 'CoiCController@post')->name('coi_c.post');
+            });
+            Route::resource('coi_c', 'CoiCController');
         });
         Route::prefix('reports')->group(function() {
             // POSTED TRANSACTIONS
