@@ -14,28 +14,28 @@ class InsertNewInsurancePrices extends Migration
      */
     public function up()
     {
-        DB::table('insuran_prices')->insert(
-            [
-                'coi_type' => 'Family Protect Ten',
-                'price' => 10.00,
-                'status' => 1,
-                'userid_created' => 1,
-                'userid_modified' => 1,
-                'created_at' => Carbon\Carbon::now(),
-                'updated_at' => Carbon\Carbon::now(),
-            ]
-        );
-        DB::table('insuran_prices')->insert(
-            [
-                'coi_type' => 'Pinoy Protect Five',
-                'price' => 5.00,
-                'status' => 1,
-                'userid_created' => 1,
-                'userid_modified' => 1,
-                'created_at' => Carbon\Carbon::now(),
-                'updated_at' => Carbon\Carbon::now(),
-            ]
-        );
+        // DB::table('insuran_prices')->insert(
+        //     [
+        //         'coi_type' => 'Family Protect Ten',
+        //         'price' => 10.00,
+        //         'status' => 1,
+        //         'userid_created' => 1,
+        //         'userid_modified' => 1,
+        //         'created_at' => Carbon\Carbon::now(),
+        //         'updated_at' => Carbon\Carbon::now(),
+        //     ]
+        // );
+        // DB::table('insuran_prices')->insert(
+        //     [
+        //         'coi_type' => 'Pinoy Protect Five',
+        //         'price' => 5.00,
+        //         'status' => 1,
+        //         'userid_created' => 1,
+        //         'userid_modified' => 1,
+        //         'created_at' => Carbon\Carbon::now(),
+        //         'updated_at' => Carbon\Carbon::now(),
+        //     ]
+        // );
     }
 
     /**

@@ -268,7 +268,8 @@ class CoiMController extends Controller
                 PDF::SetAutoPageBreak(false);
                 PDF::Image(public_path('images/mdr.png'), 115, 114, 25);
                 // PDF::Image(public_path('images/logo.png'), 107, 12, 20);
-                PDF::Image(public_path('images/logo.png'), 141, 272, 12);
+                // PDF::Image(public_path('images/logo.png'), 141, 272, 12);
+                PDF::Image(public_path('images/maagap-logo.png'), 160, 267, 6);
                 PDF::Image(public_path('images/ml_logo.png'), 15, 12, 48);
                 $view = \View::make('transactions.coi_m.coi_m-pdf', compact('transaction'));
                 $html_content = $view->render();

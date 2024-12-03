@@ -166,7 +166,7 @@
                         <input type="text" class="form-control" value="{{ $transaction->beneficiary }}" readonly />
                     </div>
                 </div>
-            @elseif($transaction->type == 'B')
+            @elseif($transaction->type == 'B' || $transaction->type == 'C')
                 <div class="row">
                     <div class="form-group col-12 col-md-6">
                         <label>COI Number</label>
